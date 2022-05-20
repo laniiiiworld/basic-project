@@ -1,0 +1,209 @@
+/* +++++++++++++++++ common +++++++++++++++++ */
+:root {
+  /* color */
+  --red-color: #ff0000;
+  --white-color: #ffffff;
+  --black-color: #030303;
+  --blue-color: #095ed4;
+  --light-gray-color: #ececec;
+  --medium-gray-color: #7e7e7e;
+  --dark-gray-color: #606060;
+
+  /* font-size */
+  --logo-size: 30px;
+  --XLarge-size: 25px;
+  --Large-size: 20px;
+  --medium-size: 18px;
+  --small-size: 14px;
+
+  /* size */
+  --video-player-size: 100%;
+  --action-btn-size: 30px;
+  --user-size: 40px;
+  --recommendation-video-size: 100px;
+
+  /* space */
+  --Large-space: 12px;
+  --medium-space: 8px;
+  --small-space: 4px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nanum Gothic", sans-serif;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: var(--light-gray-color);
+}
+
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+a {
+  text-decoration-line: none;
+}
+/* +++++++++++++++++ header +++++++++++++++++ */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--Large-space);
+}
+header .logo {
+  font-size: var(--logo-size);
+}
+header .logo i {
+  color: var(--red-color);
+}
+.icons i {
+  font-size: var(--XLarge-size);
+  padding-left: var(--medium-space);
+}
+/* +++++++++++++++++ video player +++++++++++++++++ */
+.videoPlayer {
+  position: sticky;
+  top: 0;
+  text-align: center;
+  background: var(--black-color);
+}
+.videoPlayer video {
+  width: var(--video-player-size);
+  height: var(--video-player-size);
+  max-height: 300px;
+  max-width: 1200px;
+}
+/* +++++++++++++++++ video info +++++++++++++++++ */
+.videoInfo {
+  padding: var(--Large-space);
+}
+/* metadata */
+.info__metadata {
+  display: flex;
+  justify-content: space-between;
+}
+.info__metadata .title {
+  font-size: var(--Large-size);
+  font-weight: bold;
+  padding-bottom: var(--medium-space);
+}
+.videoInfo .hitsAndDays {
+  font-size: var(--medium-size);
+  color: var(--medium-gray-color);
+}
+/* HashTags */
+.info__tags {
+}
+/* icons */
+.info__icons {
+  display: flex;
+  justify-content: space-around;
+}
+.info__icons button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.info__icons button i {
+  padding-left: var(--medium-space);
+  font-size: var(--Large-size);
+  color: var(--dark-gray-color);
+}
+.info__icons button span {
+  padding: var(--small-space);
+}
+.info__icons button i.active {
+  color: var(--black-color);
+}
+.info__icons button span {
+  font-size: var(--small-size);
+}
+/* channel info */
+.info__channel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--medium-space);
+}
+.channel {
+  display: flex;
+}
+.info__channel .user {
+  width: var(--user-size);
+  border-radius: 50%;
+}
+.info__channel .channel__name {
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--medium-space);
+}
+.info__channel .channel__name .name {
+  font-weight: bold;
+  padding-bottom: var(--small-space);
+}
+.info__channel .channel__name .subscribers {
+  font-size: var(--small-size);
+  color: var(--dark-gray-color);
+}
+.info__channel .buttons {
+  color: var(--dark-gray-color);
+  font-size: var(--Large-size);
+}
+.info__channel .buttons button {
+  font-size: var(--Large-size);
+  color: var(--dark-gray-color);
+  padding-right: var(--small-space);
+}
+/* +++++++++++++++++ recommendation video list +++++++++++++++++ */
+.upNext {
+  padding: var(--Large-space);
+}
+.upNext .next {
+  display: flex;
+  padding-bottom: var(--medium-space);
+}
+.upNext .next .img {
+  flex: 1 1 35%;
+  max-height: 10rem;
+}
+.upNext .next .img img {
+  width: 100%;
+  height: 100%;
+}
+.upNext .next .info {
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--small-space) var(--medium-space);
+}
+.upNext .next .info .title {
+  font-size: var(--medium-size);
+  font-weight: bold;
+}
+.upNext .next .info .name {
+  font-size: var(--small-size);
+  color: var(--dark-gray-color);
+}
+.upNext .next .info .hitsAndDays {
+  font-size: var(--small-size);
+  color: var(--dark-gray-color);
+}
+.upNext .next .i {
+  flex: 1 1 5%;
+  padding: var(--small-space) var(--medium-space);
+}
