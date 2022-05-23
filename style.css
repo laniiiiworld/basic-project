@@ -25,8 +25,11 @@
   --medium-space: 0.5rem;
   --small-space: 0.3rem;
 
+  /*header*/
+  --header-logo: 1 1 80%;
+  --header-icons: 1 1 20%;
   /* upNext */
-  --upNext-flex: 1 1 35%;
+  --upNext-img: 1 1 35%;
   --upNext-info: 1 1 60%;
   --upNext-i: 1 1 5%;
   --upNext-max-img: 10rem;
@@ -71,10 +74,15 @@ header {
   align-items: center;
 }
 header .logo {
+  flex: var(--header-logo);
   font-size: var(--logo-size);
 }
 header .logo i {
   color: var(--red-color);
+}
+header .icons {
+  flex: var(--header-icons);
+  text-align: right;
 }
 .icons i {
   font-size: var(--XLarge-size);
@@ -130,15 +138,14 @@ header .logo i {
   font-size: var(--Large-size);
   color: var(--dark-gray-color);
 }
-.info__icons button span {
-  padding: var(--small-space);
-}
 .info__icons button i.active {
   color: var(--black-color);
   font-weight: bold;
 }
 .info__icons button span {
+  padding: var(--small-space);
   font-size: var(--small-size);
+  color: var(--dark-gray-color);
 }
 /* channel info */
 .info__channel {
@@ -190,7 +197,7 @@ header .logo i {
   padding: var(--small-space);
 }
 .upNext .next .img {
-  flex: var(--upNext-flex);
+  flex: var(--upNext-img);
   max-width: var(--upNext-max-img);
   max-height: var(--upNext-max-img);
 }
