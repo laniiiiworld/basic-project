@@ -25,9 +25,9 @@
   --medium-space: 0.5rem;
   --small-space: 0.3rem;
 
-  /*header*/
-  --header-logo: 1 1 80%;
-  --header-icons: 1 1 20%;
+  /* flex box 비율 */
+  --flex-left: 1 1 80%;
+  --flex-right: 1 1 20%;
   /* upNext */
   --upNext-img: 1 1 35%;
   --upNext-info: 1 1 60%;
@@ -74,14 +74,14 @@ header {
   align-items: center;
 }
 header .logo {
-  flex: var(--header-logo);
+  flex: var(--flex-left);
   font-size: var(--logo-size);
 }
 header .logo i {
   color: var(--red-color);
 }
 header .icons {
-  flex: var(--header-icons);
+  flex: var(--flex-right);
   text-align: right;
 }
 .icons i {
@@ -154,7 +154,8 @@ header .icons {
   align-items: center;
   padding: var(--medium-space);
 }
-.channel {
+.info__channel .channel {
+  flex: var(--flex-left);
   display: flex;
   align-items: center;
 }
@@ -177,6 +178,8 @@ header .icons {
   color: var(--dark-gray-color);
 }
 .info__channel .buttons {
+  flex: var(--flex-right);
+  text-align: right;
   color: var(--dark-gray-color);
   font-size: var(--Large-size);
 }
