@@ -1,0 +1,11 @@
+#keys
+.env
+
+#node js
+node_modules
+package-lock.json
+package.json
+
+#test file/folder
+views
+app.js
