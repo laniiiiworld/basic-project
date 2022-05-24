@@ -1,14 +1,14 @@
 'use strict';
 
 const upNextContainer = document.querySelector('.upNext ul');
-const GOOGLE_API_KEY = 'AIzaSyDKQDoYv-HiRcvnKnOoQty29qAInSov_vA';
-const VIDEO_URL = 'https://www.googleapis.com/youtube/v3/videos?';
-const CHANNEL_URL = 'https://www.googleapis.com/youtube/v3/channels?';
+
+const SERVERLESS_URL = 'https://hide-with-serverless-functions.netlify.app/';
+const VIDEO_URL = `${SERVERLESS_URL}youtube/v3/videos?`;
+const CHANNEL_URL = `${SERVERLESS_URL}youtube/v3/channels?`;
 
 fetch(
   VIDEO_URL +
     new URLSearchParams({
-      key: GOOGLE_API_KEY,
       part: 'snippet',
       chart: 'mostPopular',
       maxResult: 1,
@@ -27,7 +27,6 @@ const getChannelInfo = (video) => {
   fetch(
     CHANNEL_URL +
       new URLSearchParams({
-        key: GOOGLE_API_KEY,
         part: 'snippet',
         id: video.snippet.channelId,
       })
