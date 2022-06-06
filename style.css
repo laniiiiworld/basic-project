@@ -117,25 +117,25 @@ main {
   padding: var(--Large-space);
 }
 /* metadata */
-.info__metadata {
+.videoInfo .metadata {
   display: flex;
   justify-content: space-between;
 }
-.info__metadata .title {
+.videoInfo .metadata .title {
   font-size: var(--Large-size);
   font-weight: bold;
   padding-bottom: var(--medium-space);
 }
-.info__metadata .title.clamp {
+.videoInfo .metadata .title.clamp {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
-.info__metadata .moreBtn {
+.videoInfo .metadata .moreBtn {
   height: 100%;
 }
-.info__metadata .moreBtn.clicked {
+.videoInfo .metadata .moreBtn.clicked {
   transform: rotate(180deg);
 }
 .videoInfo .hitsAndDays {
@@ -143,70 +143,70 @@ main {
   color: var(--medium-gray-color);
 }
 /* HashTags */
-.info__tags {
+.videoInfo .info__tags {
 }
 /* icons */
-.info__icons {
+.videoInfo .icons {
   display: flex;
   justify-content: space-around;
   padding-top: var(--medium-space);
 }
-.info__icons button {
+.videoInfo .icons button {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.info__icons button i {
+.videoInfo .icons button i {
   padding-left: var(--medium-space);
   font-size: var(--Large-size);
   color: var(--dark-gray-color);
 }
-.info__icons button i.active {
+.videoInfo .icons button i.active {
   color: var(--black-color);
   font-weight: bold;
 }
-.info__icons button span {
+.videoInfo .icons button span {
   padding: var(--small-space);
   font-size: var(--small-size);
   color: var(--dark-gray-color);
 }
 /* channel info */
-.info__channel {
+.videoInfo .channelArea {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--medium-space);
 }
-.info__channel .channel {
+.videoInfo .channelArea .info {
   flex: var(--flex-left);
   display: flex;
   align-items: center;
 }
-.info__channel .user {
+.videoInfo .channelArea .user {
   width: var(--user-size);
   height: var(--user-size);
   border-radius: 50%;
 }
-.info__channel .channel__name {
+.videoInfo .channelArea .channel {
   display: flex;
   flex-direction: column;
   margin-left: var(--medium-space);
 }
-.info__channel .channel__name .name {
+.videoInfo .channelArea .channel .name {
   font-weight: bold;
   padding-bottom: var(--small-space);
 }
-.info__channel .channel__name .subscribers {
+.videoInfo .channelArea .channel .subscribers {
   font-size: var(--small-size);
   color: var(--dark-gray-color);
 }
-.info__channel .buttons {
+.videoInfo .channelArea .buttons {
   flex: var(--flex-right);
   text-align: right;
   color: var(--dark-gray-color);
   font-size: var(--Large-size);
 }
-.info__channel .buttons button {
+.videoInfo .channelArea .buttons button {
   font-size: var(--Large-size);
   color: var(--dark-gray-color);
   padding-right: var(--small-space);

@@ -44,16 +44,16 @@ const getVideoInfo = (videoId) => {
 const setVideoInfo = (video) => {
   //console.log('setVideoInfo ---> ', video);
   const videoPlayer = document.querySelector('.videoPlayer iframe');
-  const videoTitle = document.querySelector('.videoInfo .title');
+  const videoTitle = document.querySelector('.videoInfo .metadata .title');
   const description = document.querySelector('.videoInfo .description');
   const hitsAndDays = document.querySelector('.videoInfo .hitsAndDays');
-  const tags = document.querySelector('.videoInfo .info__tags');
+  const tags = document.querySelector('.videoInfo .tags');
   videoPlayer.src = EMBED_URL + video.id;
   videoTitle.innerHTML = video.snippet.title;
   description.innerHTML = video.snippet.description;
   hitsAndDays.innerHTML = '';
   tags.innerHTML = ''; //video.snippet.tags
-  const channelName = document.querySelector('.channel .name');
+  const channelName = document.querySelector('.channelArea .channel .name');
   channelName.innerHTML = video.snippet.channelTitle;
 };
 
@@ -79,8 +79,10 @@ const getChannelInfo = (video, isSetChannel) => {
 //채널 정보 세팅
 const setChannelInfo = (data) => {
   //console.log(`setChannelInfo --->`, data);
-  const user = document.querySelector('.channel .user');
-  const subscribers = document.querySelector('.channel .subscribers');
+  const user = document.querySelector('.channelArea .info .user');
+  const subscribers = document.querySelector(
+    '.channelArea .info .channel .subscribers'
+  );
   const subscriberCount = data.statistics.subscriberCount;
   user.src = data.snippet.thumbnails.default.url;
   if (subscriberCount.length > 5) {
@@ -109,8 +111,8 @@ const makeUpNexts = (data) => {
 };
 
 /*+++++++++++++++ Buttons +++++++++++++++*/
-const moreBtn = document.querySelector('.videoInfo .moreBtn');
-const title = document.querySelector('.videoInfo .title');
+const moreBtn = document.querySelector('.videoInfo .metadata .moreBtn');
+const title = document.querySelector('.videoInfo .metadata .title');
 const description = document.querySelector('.videoInfo .description');
 moreBtn.addEventListener('click', () => {
   moreBtn.classList.toggle('clicked');
