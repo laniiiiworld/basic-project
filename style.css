@@ -69,6 +69,11 @@ button {
 a {
   text-decoration-line: none;
 }
+
+.displayNone {
+  display: none;
+}
+
 /* +++++++++++++++++ header +++++++++++++++++ */
 header {
   display: flex;
@@ -120,6 +125,18 @@ main {
   font-size: var(--Large-size);
   font-weight: bold;
   padding-bottom: var(--medium-space);
+}
+.info__metadata .title.clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.info__metadata .moreBtn {
+  height: 100%;
+}
+.info__metadata .moreBtn.clicked {
+  transform: rotate(180deg);
 }
 .videoInfo .hitsAndDays {
   font-size: var(--medium-size);

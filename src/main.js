@@ -17,7 +17,7 @@ const getVideoInfo = (videoId) => {
     obj = {
       part: 'snippet',
       chart: 'mostPopular',
-      maxResult: 1,
+      maxResults: 10,
       regionCode: 'KR',
     };
   }
@@ -26,7 +26,7 @@ const getVideoInfo = (videoId) => {
     .then((res) => res.json())
     .then((data) => {
       if (videoId) {
-        console.log('getVideoInfo ---> ', data);
+        //console.log('getVideoInfo ---> ', data);
         //비디오가 선택되었을 때, 하나만 조회하는 경우
         setVideoInfo(data.items[0]);
         getChannelInfo(data.items[0], true);
@@ -42,7 +42,7 @@ const getVideoInfo = (videoId) => {
 
 //동영상 정보 세팅
 const setVideoInfo = (video) => {
-  console.log('setVideoInfo ---> ', video);
+  //console.log('setVideoInfo ---> ', video);
   const videoPlayer = document.querySelector('.videoPlayer iframe');
   const videoTitle = document.querySelector('.videoInfo .title');
   const description = document.querySelector('.videoInfo .description');
@@ -71,7 +71,6 @@ const getChannelInfo = (video, isSetChannel) => {
       if (isSetChannel) {
         setChannelInfo(data.items[0]);
       } else {
-        video.channelThumbnail = data.items[0].snippet.thumbnails.default.url;
         makeUpNexts(video);
       }
     });
@@ -79,7 +78,7 @@ const getChannelInfo = (video, isSetChannel) => {
 
 //채널 정보 세팅
 const setChannelInfo = (data) => {
-  console.log(`setChannelInfo --->`, data);
+  //console.log(`setChannelInfo --->`, data);
   const user = document.querySelector('.channel .user');
   const subscribers = document.querySelector('.channel .subscribers');
   const subscriberCount = data.statistics.subscriberCount;
@@ -99,7 +98,7 @@ const makeUpNexts = (data) => {
   const upNextContainer = document.querySelector('.upNext ul');
   upNextContainer.innerHTML += `
   <li class="next" onclick="getVideoInfo('${data.id}');">
-    <div class="img"><img src="${data.snippet.thumbnails.high.url}" alt="" /></div>
+    <div class="img"><img src="${data.snippet.thumbnails.medium.url}" alt="" /></div>
     <div class="info">
       <span class="title">${data.snippet.title}</span>
       <span class="name">${data.snippet.channelTitle}</span>
@@ -108,6 +107,16 @@ const makeUpNexts = (data) => {
   </li>
   `;
 };
+
+/*+++++++++++++++ Buttons +++++++++++++++*/
+const moreBtn = document.querySelector('.videoInfo .moreBtn');
+const title = document.querySelector('.videoInfo .title');
+const description = document.querySelector('.videoInfo .description');
+moreBtn.addEventListener('click', () => {
+  moreBtn.classList.toggle('clicked');
+  title.classList.toggle('clamp');
+  description.classList.toggle('displayNone');
+});
 
 //onLoad
 const loadDetail = () => {
