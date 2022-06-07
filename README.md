@@ -19,9 +19,14 @@
 - 추천 동영상을 보여줄 때 media query를 적용하여 반응형으로 구현
 - youTube Api 활용하여 데이터 조회(serverless-function)
 
+### 최근 작업내역
+
+- promise → async/await로 변경
+- 동영상 설명 url, 태그들 링크로 변환
+- 추천 동영상 여러번 클릭시 같은 동영상이 반복되어 조회되는 오류 개선
+
 ### 개선사항
 
-- 동영상 설명란 개선
 - 추천 동영상 Lazy Loading 구현
 - 좋아요/싫어요/... 버튼들 구현
 

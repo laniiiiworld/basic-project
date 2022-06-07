@@ -126,12 +126,6 @@ main {
   font-weight: bold;
   padding-bottom: var(--medium-space);
 }
-.videoInfo .metadata .title.clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
 .videoInfo .metadata .moreBtn {
   height: 100%;
 }
@@ -175,28 +169,29 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--medium-space);
+  padding-top: var(--medium-space);
+  padding-bottom: calc(var(--Large-space) * 2);
 }
 .videoInfo .channelArea .info {
   flex: var(--flex-left);
   display: flex;
   align-items: center;
 }
-.videoInfo .channelArea .user {
+.videoInfo .channelArea .info .user {
   width: var(--user-size);
   height: var(--user-size);
   border-radius: 50%;
 }
-.videoInfo .channelArea .channel {
+.videoInfo .channelArea .info .channel {
   display: flex;
   flex-direction: column;
   margin-left: var(--medium-space);
 }
-.videoInfo .channelArea .channel .name {
+.videoInfo .channelArea .info .channel .name {
   font-weight: bold;
   padding-bottom: var(--small-space);
 }
-.videoInfo .channelArea .channel .subscribers {
+.videoInfo .channelArea .info .channel .subscribers {
   font-size: var(--small-size);
   color: var(--dark-gray-color);
 }
@@ -210,6 +205,20 @@ main {
   font-size: var(--Large-size);
   color: var(--dark-gray-color);
   padding-right: var(--small-space);
+}
+.videoInfo .description {
+  margin-left: calc(var(--Large-space) * 4.5);
+  line-height: calc(var(--medium-space) * 2.5);
+}
+.videoInfo .description .info.clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.videoInfo .description button {
+  font-size: var(--small-size);
+  color: var(--dark-gray-color);
 }
 /* +++++++++++++++++ recommendation video list +++++++++++++++++ */
 .upNext {
@@ -277,6 +286,9 @@ main {
   }
   main .upNext {
     flex: var(--flex-right);
+  }
+  .videoPlayer {
+    position: static;
   }
   .videoPlayer iframe {
     height: var(--video-player-large);

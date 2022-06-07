@@ -4,16 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/4f9bfe4b53.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/4f9bfe4b53.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&family=Source+Sans+Pro:wght@300&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <script src="src/main.js" defer></script>
     <title>YouTube Clone Codding</title>
@@ -40,10 +34,9 @@
         <section class="videoInfo">
           <!-- +++++++++ metadata +++++++++ -->
           <div class="metadata">
-            <span class="title clamp">똘이 코골이 영상🐶 대낮주의!!!</span>
+            <span class="title">똘이 코골이 영상🐶 대낮주의!!!</span>
             <i class="fa-solid fa-angle-down moreBtn"></i>
           </div>
-          <div class="description displayNone"></div>
           <span class="hitsAndDays">조회수 3209회 2달 전</span>
           <!-- +++++++++ HashTags +++++++++ -->
           <span class="tags">
@@ -100,8 +93,13 @@
               <i class="fa-solid fa-bell"></i>
             </div>
           </div>
-          <hr />
+          <div class="description">
+            <div class="info clamp"></div>
+            <button class="moreBtn">더보기</button>
+            <button class="shortBtn displayNone">간략히</button>
+          </div>
         </section>
+        <hr />
       </article>
       <!-- ++++++++++++++++++ recommendation video list ++++++++++++++++++ -->
       <section class="upNext">
