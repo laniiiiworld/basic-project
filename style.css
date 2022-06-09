@@ -31,6 +31,8 @@
   /* flex box 비율 */
   --flex-left: 1 1 70%;
   --flex-right: 1 1 30%;
+  --flex-main-left: 1 1 60vw;
+  --flex-main-right: 1 1 40vw;
 
   /* upNext */
   --upNext-img: 1 1 35vw;
@@ -109,10 +111,11 @@ main {
   top: 0;
   text-align: center;
   background: var(--black-color);
+  aspect-ratio: 16 / 9; /* 16:9 비율 지정 */
 }
 .videoPlayer iframe {
-  width: var(--video-player-width);
-  height: var(--video-player-small);
+  width: 100%;
+  height: 100%;
 }
 /* +++++++++++++++++ video info +++++++++++++++++ */
 .videoInfo {
@@ -265,12 +268,10 @@ main {
 /* +++++++++++++++++ media query +++++++++++++++++ */
 @media only screen and (min-width: 576px) {
   .videoPlayer iframe {
-    height: var(--video-player-small);
   }
 }
 @media only screen and (min-width: 768px) {
   .videoPlayer iframe {
-    height: var(--video-player-medium);
   }
   .upNext ul {
     grid-template-columns: repeat(2, 1fr);
@@ -281,16 +282,15 @@ main {
     flex-direction: row;
   }
   main .videoArea {
-    flex: var(--flex-left);
+    flex: var(--flex-main-left);
   }
   main .upNext {
-    flex: var(--flex-right);
+    flex: var(--flex-main-right);
   }
   .videoPlayer {
     position: static;
   }
   .videoPlayer iframe {
-    height: var(--video-player-large);
   }
   .upNext ul {
     display: block;

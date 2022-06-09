@@ -43,7 +43,7 @@ async function getUpNextInfo() {
     const obj = {
       part: 'snippet',
       chart: 'mostPopular',
-      maxResults: 1,
+      maxResults: 3,
       regionCode: 'KR',
     };
     const videos = await getDataAPIs(VIDEO_URL, obj);
