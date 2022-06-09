@@ -235,8 +235,7 @@ main {
 }
 .upNext .next .img {
   flex: var(--upNext-img);
-  min-width: var(--upNext-img-width);
-  height: var(--upNext-img-height);
+  aspect-ratio: 16 / 9; /* 16:9 비율 지정 */
 }
 .upNext .next .img img {
   width: 100%;
@@ -294,19 +293,5 @@ main {
   }
   .upNext ul {
     display: block;
-  }
-  .upNext .next .img {
-    flex: var(--upNext-info);
-  }
-  .upNext .next .info {
-    flex: var(--upNext-img);
-  }
-}
-@media only screen and (min-width: 1300px) {
-  .upNext .next .img {
-    flex: var(--upNext-img);
-  }
-  .upNext .next .info {
-    flex: var(--upNext-info);
   }
 }
