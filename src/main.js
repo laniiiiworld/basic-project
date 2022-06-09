@@ -14,7 +14,7 @@ function initForm() {
   moreBtn.classList.remove('displayNone');
   shortBtn.classList.remove('displayNone');
   description.classList.add('clamp');
-  moreBtn.classList.add('displayNone');
+  shortBtn.classList.add('displayNone');
 }
 //API에서 데이터를 가져오는 함수
 function getDataAPIs(url, obj) {
@@ -100,10 +100,7 @@ const setVideoInfo = (video) => {
   //줄바꿈 변환
   str = str.replaceAll('\n', '<br/>');
   //url link로 변경
-  const links = str.match(/(?:https?:\/\/)[a-zA-Z0-9\.\/\-]+/g);
-  links.forEach((link) => {
-    str = str.replace(link, `<a href='${link}' target='_blank'>${link}</a>`);
-  });
+  str = str.replace(/(?:https?:\/\/)[a-zA-Z0-9\.\/\-]+/g, (link) => `<a href='${link}' target='_blank'>${link}</a>`);
   //태그들 link로 변경
   str = str.replace(/#[a-zA-Z0-9ㄱ-ㅎ가-힣]+/g, (tag) => `<a href='#'>${tag}</a>`);
   description.innerHTML = str;
