@@ -1,8 +1,5 @@
 'use strict';
 
-const SERVERLESS_URL = 'https://hide-with-serverless-functions.netlify.app/';
-const VIDEO_URL = `${SERVERLESS_URL}youtube/v3/videos?`;
-const CHANNEL_URL = `${SERVERLESS_URL}youtube/v3/channels?`;
 const EMBED_URL = 'https://www.youtube.com/embed/';
 
 //초기화
@@ -16,11 +13,7 @@ function initForm() {
   description.classList.add('clamp');
   shortBtn.classList.add('displayNone');
 }
-//API에서 데이터를 가져오는 함수
-function getDataAPIs(url, obj) {
-  const response = fetch(url + new URLSearchParams(obj));
-  return response.then((res) => res.json());
-}
+
 //API에서 동영상 정보를 가져오는 함수
 async function getVideoInfo(videoId) {
   try {
@@ -28,7 +21,7 @@ async function getVideoInfo(videoId) {
       part: 'snippet',
       id: videoId,
     };
-    const video = await getDataAPIs(VIDEO_URL, obj);
+    const video = await getDataAPIs('VIDEO', obj);
     initForm();
     getUpNextInfo();
     setVideoInfo(video.items[0]);
@@ -46,7 +39,7 @@ async function getUpNextInfo() {
       maxResults: 3,
       regionCode: 'KR',
     };
-    const videos = await getDataAPIs(VIDEO_URL, obj);
+    const videos = await getDataAPIs('VIDEO', obj);
     //추천 동영상 목록 만들기
     makeUpNexts(videos.items);
   } catch (err) {
@@ -61,7 +54,7 @@ async function getChannelInfo(video) {
       part: 'snippet,statistics',
       id: video.snippet.channelId,
     };
-    const channel = await getDataAPIs(CHANNEL_URL, obj);
+    const channel = await getDataAPIs('CHANNEL', obj);
     setChannelInfo(channel.items[0]);
   } catch (err) {
     console.log(err);
@@ -145,9 +138,3 @@ const setChannelInfo = (data) => {
     shortBtn.classList.toggle('displayNone');
   });
 }
-//onLoad
-const loadDetail = () => {
-  getUpNextInfo();
-};
-
-loadDetail();
