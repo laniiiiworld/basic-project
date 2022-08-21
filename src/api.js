@@ -3,7 +3,7 @@ const VIDEO_URL = `${SERVERLESS_URL}youtube/v3/videos?`;
 const CHANNEL_URL = `${SERVERLESS_URL}youtube/v3/channels?`;
 
 //API에서 데이터를 가져오는 함수
-async function getDataAPIs(arg, obj) {
+export async function getDataAPIs(arg, obj) {
   const url = arg === 'VIDEO' ? VIDEO_URL : CHANNEL_URL;
   try {
     const res = await fetch(url + new URLSearchParams(obj));
