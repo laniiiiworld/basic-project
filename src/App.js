@@ -6,7 +6,11 @@ export default class App {
   constructor($app) {
     this.state = { simpleVideos: [], channelInfo: [] };
     this.channel = new Channel({ $app, initialState: { channelInfo: this.state.channelInfo } });
-    this.simpleVideo = new SimpleVideo({ $app, initalState: { videos: this.state.simpleVideos } });
+    this.simpleVideo = new SimpleVideo({
+      $app,
+      initalState: { videos: this.state.simpleVideos },
+      onClick: this.onNextVideoClick,
+    });
     this.init();
   }
 
@@ -16,22 +20,40 @@ export default class App {
     this.simpleVideo.setState({ videos: this.state.simpleVideos });
   }
 
-  async init() {
+  onNextVideoClick = async (videoId) => {
+    try {
+      initForm();
+      const video = await this.getVideoInfo(videoId);
+      const channelId = video.snippet.channelId;
+      const channelInfo = await this.getChannelInfo(channelId);
+      const simpleVideos = await this.getUpNextInfo();
+      this.setState({
+        ...this.state,
+        simpleVideos: simpleVideos,
+        channelInfo: channelInfo,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  init = async () => {
     try {
       initForm();
       // const video = await this.getVideoInfo(videoId);
       // const channelId = video.snippet.channelId;
       // const channelInfo = await this.getChannelInfo(channelId);
+      const channelInfo = [];
       const simpleVideos = await this.getUpNextInfo();
       this.setState({
         ...this.state,
         simpleVideos: simpleVideos,
-        channelInfo: [],
+        channelInfo: channelInfo,
       });
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   //API에서 동영상 정보를 가져오는 함수
   async getVideoInfo(videoId) {

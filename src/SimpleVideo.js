@@ -1,7 +1,13 @@
 export default class SimpleVideo {
-  constructor({ $app, initalState }) {
+  constructor({ $app, initalState, onClick }) {
     this.state = initalState;
-    this.upNextContainer = document.querySelector('.upNext ul');
+    this.onClick = onClick;
+    this.$target = document.querySelector('.upNext ul');
+
+    this.$target.addEventListener('click', (event) => {
+      const $video = event.target.closest('.next');
+      onClick($video.dataset.targetId);
+    });
   }
   setState(nextState) {
     this.state = nextState;
@@ -24,6 +30,6 @@ export default class SimpleVideo {
                   `
       )
       .join('');
-    this.upNextContainer.innerHTML = upNextHtml;
+    this.$target.innerHTML = upNextHtml;
   }
 }
