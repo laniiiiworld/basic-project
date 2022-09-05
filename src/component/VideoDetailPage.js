@@ -1,21 +1,26 @@
 import Channel from './Channel.js';
 import SimpleVideo from './SimpleVideo.js';
-import { getDataAPIs } from './api.js';
+import { getDataAPIs } from '../api.js';
+import VideoTest from './VideoTest.js';
+import Video from './Video.js';
 
-export default class App {
-  constructor($app) {
-    this.state = { simpleVideos: [], channelInfo: [] };
-    this.channel = new Channel({ $app, initialState: { channelInfo: this.state.channelInfo } });
+export default class VideoDetailPage {
+  constructor({ $target, videoId }) {
+    this.state = { video: [], simpleVideos: [], channelInfo: [] };
+    this.videoTest = new VideoTest({ $target });
+    this.video = new Video({ $target, video: this.state.video });
+    this.channel = new Channel({ $target, initialState: { channelInfo: this.state.channelInfo } });
     this.simpleVideo = new SimpleVideo({
-      $app,
+      $target,
       initalState: { videos: this.state.simpleVideos },
-      onClick: this.onNextVideoClick,
+      onClick: this.onNextVideoClick(videoId),
     });
-    this.init();
+    this.init(videoId);
   }
 
   setState(nextState) {
     this.state = nextState;
+    this.video.setState(this.state.video);
     this.channel.setState({ channelInfo: this.state.channelInfo });
     this.simpleVideo.setState({ videos: this.state.simpleVideos });
   }
@@ -29,6 +34,7 @@ export default class App {
       const simpleVideos = await this.getUpNextInfo();
       this.setState({
         ...this.state,
+        video,
         simpleVideos: simpleVideos,
         channelInfo: channelInfo,
       });
@@ -37,13 +43,12 @@ export default class App {
     }
   };
 
-  init = async () => {
+  init = async (videoId) => {
     try {
       initForm();
-      // const video = await this.getVideoInfo(videoId);
-      // const channelId = video.snippet.channelId;
-      // const channelInfo = await this.getChannelInfo(channelId);
-      const channelInfo = [];
+      const video = await this.getVideoInfo(videoId);
+      const channelId = video.snippet.channelId;
+      const channelInfo = await this.getChannelInfo(channelId);
       const simpleVideos = await this.getUpNextInfo();
       this.setState({
         ...this.state,

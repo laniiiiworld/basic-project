@@ -1,8 +1,12 @@
 export default class SimpleVideo {
-  constructor({ $app, initalState, onClick }) {
+  constructor({ $target, initalState, onClick }) {
     this.state = initalState;
     this.onClick = onClick;
-    this.$target = document.querySelector('.upNext ul');
+    this.$target = document.createElement('section');
+    this.$target.className = 'upNext';
+    const upNextUl = document.createElement('ul');
+    this.$target.appendChild(upNextUl);
+    $target.appendChild(this.$target);
 
     this.$target.addEventListener('click', (event) => {
       const $video = event.target.closest('.next');

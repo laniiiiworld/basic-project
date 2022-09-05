@@ -14,7 +14,7 @@ export default class Video {
   }
   render() {
     //동영상 정보 세팅 setVideoInfo
-    const video = this.state.video;
+    const video = this.state;
     this.videoPlayer.src = EMBED_URL + video.id;
     this.videoTitle.innerHTML = video.snippet.title;
     let str = video.snippet.description;
