@@ -12,7 +12,7 @@ export default class VideoDetailPage {
     this.channel = new Channel({ $target, initialState: { channelInfo: this.state.channelInfo } });
     this.simpleVideo = new SimpleVideo({
       $target,
-      initalState: { videos: this.state.simpleVideos },
+      initalState: { className: 'videoList', videos: this.state.simpleVideos },
       onClick: this.onNextVideoClick(videoId),
     });
     this.init(videoId);
@@ -22,7 +22,7 @@ export default class VideoDetailPage {
     this.state = nextState;
     this.video.setState(this.state.video);
     this.channel.setState({ channelInfo: this.state.channelInfo });
-    this.simpleVideo.setState({ videos: this.state.simpleVideos });
+    this.simpleVideo.setState({ className: 'videoList', videos: this.state.simpleVideos });
   }
 
   onNextVideoClick = async (videoId) => {
@@ -31,7 +31,7 @@ export default class VideoDetailPage {
       const video = await this.getVideoInfo(videoId);
       const channelId = video.snippet.channelId;
       const channelInfo = await this.getChannelInfo(channelId);
-      const simpleVideos = await this.getUpNextInfo();
+      const simpleVideos = await this.getVideoListInfo();
       this.setState({
         ...this.state,
         video,
@@ -49,7 +49,7 @@ export default class VideoDetailPage {
       const video = await this.getVideoInfo(videoId);
       const channelId = video.snippet.channelId;
       const channelInfo = await this.getChannelInfo(channelId);
-      const simpleVideos = await this.getUpNextInfo();
+      const simpleVideos = await this.getVideoListInfo();
       this.setState({
         ...this.state,
         simpleVideos: simpleVideos,
@@ -89,7 +89,7 @@ export default class VideoDetailPage {
   }
 
   //API에서 추천동영상 정보를 가져오는 함수
-  async getUpNextInfo() {
+  async getVideoListInfo() {
     try {
       const obj = {
         part: 'snippet',

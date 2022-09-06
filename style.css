@@ -34,12 +34,15 @@
   --flex-main-left: 1 1 60vw;
   --flex-main-right: 1 1 40vw;
 
-  /* upNext */
-  --upNext-img: 1 1 40vw;
-  --upNext-info: 1 1 55vw;
-  --upNext-i: 1 1 5vw;
-  --upNext-img-width: 155px;
-  --upNext-img-height: auto;
+  /* video common */
+  --video-common-info: 1 1 95vw;
+  --video-common-i: 1 1 5vw;
+
+  /* videoList */
+  --video-list-img: 1 1 40vw;
+  --video-list-infoAndIcon: 1 1 60vw;
+  --video-list-img-width: 155px;
+  --video-list-img-height: auto;
 }
 
 * {
@@ -103,7 +106,22 @@ header .icons {
 /* +++++++++++++++++ video Area(main) +++++++++++++++++ */
 main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+main .videoArea {
+  flex: var(--flex-main-left);
+}
+main .videoList {
+  flex: var(--flex-main-right);
+}
+main .videoArea {
+  flex: var(--flex-main-left);
+}
+main .videoList {
+  flex: var(--flex-main-right);
+}
+.videoPlayer {
+  position: static;
 }
 /* +++++++++++++++++ video player +++++++++++++++++ */
 .videoPlayer {
@@ -222,76 +240,120 @@ main {
   font-size: var(--small-size);
   color: var(--dark-gray-color);
 }
-/* +++++++++++++++++ recommendation video list +++++++++++++++++ */
-.upNext {
-  padding: var(--Large-space);
-}
-.upNext ul {
-  display: grid;
-}
-.upNext .next {
-  display: flex;
-  padding: var(--small-space);
-}
-.upNext .next .img {
-  flex: var(--upNext-img);
-  aspect-ratio: 16 / 9; /* 16:9 비율 지정 */
-}
-.upNext .next .img img {
+/* +++++++++++ video list&item common +++++++++++ */
+.next .img img {
   width: 100%;
   height: 100%;
 }
-.upNext .next .info {
-  flex: var(--upNext-info);
+.next .infoAndIcon {
+  display: flex;
+}
+.next .infoAndIcon .info {
   display: flex;
   flex-direction: column;
-  padding: var(--small-space) var(--medium-space);
 }
-.upNext .next .info .title {
+.next .infoAndIcon .info .title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.next .infoAndIcon .info .title {
   font-size: var(--medium-size);
   font-weight: bold;
 }
-.upNext .next .info .name {
+.next .infoAndIcon .info .name {
   font-size: var(--small-size);
   color: var(--dark-gray-color);
 }
-.upNext .next .info .hitsAndDays {
+.next .infoAndIcon .info .hitsAndDays {
   font-size: var(--small-size);
   color: var(--dark-gray-color);
 }
-.upNext .next .i {
-  flex: var(--upNext-i);
+/* +++++++++++++++++ video list +++++++++++++++++ */
+.videoList {
+  padding: var(--Large-space);
+}
+.videoList ul {
+  display: block;
+}
+.videoList .next {
+  display: flex;
+  padding: var(--small-space);
+}
+
+.videoList .next .img {
+  flex: var(--video-list-img);
+  aspect-ratio: 16 / 9; /* 16:9 비율 지정 */
+}
+.videoList .next .infoAndIcon {
+  flex: var(--video-list-infoAndIcon);
+}
+.videoList .next .infoAndIcon .info {
+  flex: var(--video-common-info);
   padding: var(--small-space) var(--medium-space);
+}
+.videoList .next .infoAndIcon i {
+  flex: var(--video-common-i);
+  padding: var(--small-space) var(--medium-space);
+}
+/* +++++++++++++++++ video item +++++++++++++++++ */
+.videoItem {
+  padding: var(--Large-space);
+}
+.videoItem ul {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.videoItem .next {
+  padding: var(--small-space);
+}
+.videoItem .next .img {
+}
+.videoItem .next .infoAndIcon {
+}
+.videoItem .next .infoAndIcon .info {
+  flex: var(--video-common-info);
+}
+.videoItem .next .infoAndIcon i {
+  flex: var(--video-common-i);
 }
 
 /* +++++++++++++++++ media query +++++++++++++++++ */
-@media only screen and (min-width: 576px) {
-  .videoPlayer iframe {
-  }
-}
-@media only screen and (min-width: 768px) {
-  .videoPlayer iframe {
-  }
-  .upNext ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media only screen and (min-width: 992px) {
+@media only screen and (max-width: 992px) {
   main {
     flex-direction: row;
   }
-  main .videoArea {
-    flex: var(--flex-main-left);
-  }
-  main .upNext {
-    flex: var(--flex-main-right);
-  }
-  .videoPlayer {
-    position: static;
-  }
-  .videoPlayer iframe {
-  }
-  .upNext ul {
+  .videoList ul {
     display: block;
+  }
+  .videoItem ul {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media only screen and (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+  .videoList ul {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .videoItem ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 576px) {
+  .videoList ul {
+  }
+  .videoItem ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 480px) {
+  .videoList ul {
+  }
+  .videoItem ul {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

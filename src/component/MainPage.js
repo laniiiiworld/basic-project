@@ -5,14 +5,14 @@ import { routeChange } from '../router.js';
 
 export default class MainPage {
   constructor({ $target }) {
-    // $target.innerHTML = `<section class="upNext mainPage">
+    // $target.innerHTML = `<section class="videoItem">
     //                        <ul></ul>
     //                      </section>`;
     this.state = { simpleVideos: [], channelInfo: [] };
     this.channel = new Channel({ $target, initialState: { channelInfo: this.state.channelInfo } });
     this.simpleVideo = new SimpleVideo({
       $target,
-      initalState: { videos: this.state.simpleVideos },
+      initalState: { className: 'videoItem', videos: this.state.simpleVideos },
       onClick: this.onNextVideoClick,
     });
     this.init();
@@ -21,12 +21,12 @@ export default class MainPage {
   setState(nextState) {
     this.state = nextState;
     this.channel.setState({ channelInfo: this.state.channelInfo });
-    this.simpleVideo.setState({ videos: this.state.simpleVideos });
+    this.simpleVideo.setState({ className: 'videoItem', videos: this.state.simpleVideos });
   }
   init = async () => {
     try {
       const channelInfo = [];
-      const simpleVideos = await this.getUpNextInfo();
+      const simpleVideos = await this.getVideoItemInfo();
       this.setState({
         ...this.state,
         simpleVideos: simpleVideos,
@@ -38,7 +38,7 @@ export default class MainPage {
   };
 
   //API에서 추천동영상 정보를 가져오는 함수
-  async getUpNextInfo() {
+  async getVideoItemInfo() {
     try {
       const obj = {
         part: 'snippet',
