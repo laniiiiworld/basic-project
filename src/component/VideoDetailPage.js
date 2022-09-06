@@ -119,19 +119,19 @@ function initForm() {
 
 /*+++++++++++++++ Buttons +++++++++++++++*/
 {
-  const description = document.querySelector('.videoInfo .description .info');
-  const moreBtn = document.querySelector('.videoInfo .description .moreBtn');
-  const shortBtn = document.querySelector('.videoInfo .description .shortBtn');
-  //더보기
-  moreBtn.addEventListener('click', () => {
-    description.classList.toggle('clamp');
-    moreBtn.classList.toggle('displayNone');
-    shortBtn.classList.toggle('displayNone');
-  });
-  //간략히
-  shortBtn.addEventListener('click', () => {
-    description.classList.toggle('clamp');
-    moreBtn.classList.toggle('displayNone');
-    shortBtn.classList.toggle('displayNone');
-  });
+  // const description = document.querySelector('.videoInfo .description .info');
+  // const moreBtn = document.querySelector('.videoInfo .description .moreBtn');
+  // const shortBtn = document.querySelector('.videoInfo .description .shortBtn');
+  // //더보기
+  // moreBtn.addEventListener('click', () => {
+  //   description.classList.toggle('clamp');
+  //   moreBtn.classList.toggle('displayNone');
+  //   shortBtn.classList.toggle('displayNone');
+  // });
+  // //간략히
+  // shortBtn.addEventListener('click', () => {
+  //   description.classList.toggle('clamp');
+  //   moreBtn.classList.toggle('displayNone');
+  //   shortBtn.classList.toggle('displayNone');
+  // });
 }

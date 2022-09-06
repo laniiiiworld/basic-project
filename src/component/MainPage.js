@@ -5,11 +5,7 @@ import { routeChange } from '../router.js';
 
 export default class MainPage {
   constructor({ $target }) {
-    // $target.innerHTML = `<section class="videoItem">
-    //                        <ul></ul>
-    //                      </section>`;
     this.state = { simpleVideos: [], channelInfo: [] };
-    this.channel = new Channel({ $target, initialState: { channelInfo: this.state.channelInfo } });
     this.simpleVideo = new SimpleVideo({
       $target,
       initalState: { className: 'videoItem', videos: this.state.simpleVideos },
@@ -20,7 +16,6 @@ export default class MainPage {
 
   setState(nextState) {
     this.state = nextState;
-    this.channel.setState({ channelInfo: this.state.channelInfo });
     this.simpleVideo.setState({ className: 'videoItem', videos: this.state.simpleVideos });
   }
   init = async () => {

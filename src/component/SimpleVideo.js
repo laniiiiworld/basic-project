@@ -8,7 +8,7 @@ export default class SimpleVideo {
 
     this.$target.addEventListener('click', (event) => {
       const $video = event.target.closest('.next');
-      onClick($video.dataset.targetId);
+      $video.dataset && onClick($video.dataset.targetId);
     });
   }
   setState(nextState) {
