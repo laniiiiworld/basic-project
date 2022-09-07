@@ -5,13 +5,16 @@ import VideoTest from './VideoTest.js';
 import Video from './Video.js';
 
 export default class VideoDetailPage {
-  constructor({ $target, videoId }) {
+  constructor({ $target, initialState, videoId }) {
+    this.state = initialState;
+    this.$videoDetailPage = $target;
+    this.$videoDetailPage.className = this.state.className;
     this.state = { video: [], simpleVideos: [], channelInfo: [] };
-    this.videoTest = new VideoTest({ $target });
-    this.video = new Video({ $target, video: this.state.video });
-    this.channel = new Channel({ $target, initialState: { channelInfo: this.state.channelInfo } });
+    this.videoTest = new VideoTest({ $target: this.$videoDetailPage });
+    this.video = new Video({ $target: this.$videoDetailPage, video: this.state.video });
+    this.channel = new Channel({ $target: this.$videoDetailPage, initialState: { channelInfo: this.state.channelInfo } });
     this.simpleVideo = new SimpleVideo({
-      $target,
+      $target: this.$videoDetailPage,
       initalState: { className: 'videoList', videos: this.state.simpleVideos },
       onClick: this.onNextVideoClick(videoId),
     });

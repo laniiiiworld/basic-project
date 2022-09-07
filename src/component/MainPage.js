@@ -1,13 +1,15 @@
-import Channel from './Channel.js';
 import SimpleVideo from './SimpleVideo.js';
 import { getDataAPIs } from '../api.js';
 import { routeChange } from '../router.js';
 
 export default class MainPage {
-  constructor({ $target }) {
+  constructor({ $target, initialState }) {
+    this.state = initialState;
+    this.$mainPage = $target;
+    this.$mainPage.className = this.state.className;
     this.state = { simpleVideos: [], channelInfo: [] };
     this.simpleVideo = new SimpleVideo({
-      $target,
+      $target: this.$mainPage,
       initalState: { className: 'videoItem', videos: this.state.simpleVideos },
       onClick: this.onNextVideoClick,
     });
