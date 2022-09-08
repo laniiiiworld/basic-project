@@ -1,4 +1,4 @@
-import SimpleVideo from './SimpleVideo.js';
+import VideoList from './VideoList.js';
 import { getDataAPIs } from '../api.js';
 import { routeChange } from '../router.js';
 import Loading from './Loading.js';
@@ -8,28 +8,29 @@ export default class MainPage {
     this.state = initialState;
     this.$mainPage = $target;
     this.$mainPage.className = this.state.className;
-    this.state = { simpleVideos: [], channelInfo: [] };
+    this.state = { videoLists: [], channelInfo: [] };
     this.loading = new Loading(this.$mainPage);
     this.loading.show();
-    this.simpleVideo = new SimpleVideo({
+    this.videoList = new VideoList({
       $target: this.$mainPage,
-      initalState: { className: 'videoItem', videos: this.state.simpleVideos },
-      onClick: this.onNextVideoClick,
+      initalState: { className: 'videoColumn', videos: this.state.videoLists },
     });
+    this.videoList.setClickEventListener(this.onNextVideoClick);
     this.init();
   }
 
   setState(nextState) {
     this.state = nextState;
-    this.simpleVideo.setState({ className: 'videoItem', videos: this.state.simpleVideos });
+    this.videoList.setState({ className: 'videoColumn', videos: this.state.videoLists });
   }
+
   init = async () => {
     try {
       const channelInfo = [];
-      const simpleVideos = await this.getVideoItemInfo();
+      const videoLists = await this.getVideoListInfo();
       this.setState({
         ...this.state,
-        simpleVideos: simpleVideos,
+        videoLists: videoLists,
         channelInfo: channelInfo,
       });
     } catch (err) {
@@ -40,7 +41,7 @@ export default class MainPage {
   };
 
   //API에서 추천동영상 정보를 가져오는 함수
-  async getVideoItemInfo() {
+  async getVideoListInfo() {
     try {
       const obj = {
         part: 'snippet',
@@ -48,16 +49,16 @@ export default class MainPage {
         maxResults: 5,
         regionCode: 'KR',
       };
-      const simpleVideos = await getDataAPIs('VIDEO', obj);
-      return simpleVideos.items;
+      const videoLists = await getDataAPIs('VIDEO', obj);
+      return videoLists.items;
     } catch (err) {
       console.log(err);
     }
   }
 
-  onNextVideoClick = async (videoId) => {
-    if (videoId) {
-      routeChange(`/detail/${videoId}`);
-    }
+  onNextVideoClick = (event) => {
+    const $video = event.target.closest('.next');
+    const videoId = $video.dataset?.targetId;
+    videoId && routeChange(`/detail/${videoId}`);
   };
 }

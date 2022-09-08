@@ -1,24 +1,59 @@
-export default class VideoTest {
-  constructor({ $target }) {
-    $target.innerHTML = `      
+import Video from './Video.js';
+import Channel from './Channel.js';
+
+export default class VideoItem {
+  constructor({ $target, initialState }) {
+    this.$target = $target;
+    this.state = initialState;
+    this.render();
+
+    this.video = new Video({ $target, video: this.state.video });
+    this.channel = new Channel({ $target, initialState: { channelInfo: this.state.channelInfo } });
+
+    /*+++++++++++++++ Buttons +++++++++++++++*/
+    const description = document.querySelector('.videoInfo .description .info');
+    const moreBtn = document.querySelector('.videoInfo .description .moreBtn');
+    const shortBtn = document.querySelector('.videoInfo .description .shortBtn');
+    //더보기
+    moreBtn.addEventListener('click', () => {
+      description.classList.toggle('clamp');
+      moreBtn.classList.toggle('displayNone');
+      shortBtn.classList.toggle('displayNone');
+    });
+    //간략히
+    shortBtn.addEventListener('click', () => {
+      description.classList.toggle('clamp');
+      moreBtn.classList.toggle('displayNone');
+      shortBtn.classList.toggle('displayNone');
+    });
+  }
+
+  setState(nextState) {
+    this.state = nextState;
+    this.video.setState(this.state.video);
+    this.channel.setState({ channelInfo: this.state.channelInfo });
+  }
+
+  render() {
+    this.$target.innerHTML = `      
     <article class="videoArea">
       <section class="videoPlayer">
-        <iframe src="video/IMG_4637.mp4" frameborder="0"></iframe>
+        <iframe src="" frameborder="0"></iframe>
       </section>
       <!-- ++++++++++++++++++ video info ++++++++++++++++++ -->
       <section class="videoInfo">
         <!-- +++++++++ metadata +++++++++ -->
         <div class="metadata">
-          <span class="title">똘이 코골이 영상🐶 대낮주의!!!</span>
+          <span class="title"></span>
           <i class="fa-solid fa-angle-down moreBtn"></i>
         </div>
-        <span class="hitsAndDays">조회수 3209회 2달 전</span>
+        <span class="hitsAndDays"></span>
         <!-- +++++++++ icons +++++++++ -->
         <ul class="icons">
           <li>
             <button>
               <i class="fa-regular fa-thumbs-up active"></i>
-              <span>532</span>
+              <span>0</span>
             </button>
           </li>
           <li>
@@ -50,10 +85,10 @@ export default class VideoTest {
         <!-- +++++++++ channel info +++++++++ -->
         <div class="channelArea">
           <div class="info">
-            <img src="imgs/user2.jpeg" alt="" class="user" />
+            <img src="i" alt="" class="user" />
             <div class="channel">
-              <span class="name">똘이언니</span>
-              <span class="subscribers">구독자 10만명</span>
+              <span class="name"></span>
+              <span class="subscribers"></span>
             </div>
           </div>
           <div class="buttons">

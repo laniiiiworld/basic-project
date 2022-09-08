@@ -15,6 +15,11 @@
 
 - 진행중(2022.08.20~)
 
+### 컴포넌트 구조
+
+- URL 라우팅에 따라 MainPage, VideoSearchPage, VideoDetailPage 컴포넌트를 렌더링하는 구조
+  ![유튜브 클론코딩 컴포넌트 구조](/imgs/IMG_1895.jpg)
+
 ### 주요기능
 
 - ES6 모듈 형태로 작성
@@ -24,10 +29,6 @@
   - async/await 사용
   - serverless function 중 Netlify Functions를 활용하여 API키 숨김 처리
 - 동영상 리스트 중 하나를 선택하여 페이지 이동시 이벤트 위임을 활용하여 처리
-
-### 컴포넌트 구조
-
-- URL 라우팅에 따라 MainPage, VideoSearchPage, VideoDetailPage 컴포넌트를 렌더링하는 구조
 
 ### 개선사항
 

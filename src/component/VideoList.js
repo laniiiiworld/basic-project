@@ -1,16 +1,21 @@
-export default class SimpleVideo {
+export default class VideoList {
   constructor({ $target, initalState, onClick }) {
     this.state = initalState;
-    this.onClick = onClick;
+    // this.onClick = onClick;
     this.$target = document.createElement('section');
     this.$target.className = this.state.className;
     $target.appendChild(this.$target);
 
     this.$target.addEventListener('click', (event) => {
-      const $video = event.target.closest('.next');
-      $video.dataset && onClick($video.dataset.targetId);
+      this.onClick && this.onClick(event);
+      // const $video = event.target.closest('.next');
+      // $video.dataset && this.onClick($video.dataset.targetId);
     });
   }
+  setClickEventListener(onClick) {
+    this.onClick = onClick;
+  }
+
   setState(nextState) {
     this.state = nextState;
     this.render();
@@ -18,7 +23,6 @@ export default class SimpleVideo {
   render() {
     const videos = this.state.videos;
     if (!videos) return;
-    //  onclick="getVideoInfo('${data.id}');"
     const videoListHtml = `<ul>${videos
       .map(
         (data) => `<li class="next" data-target-id="${data.id}" >

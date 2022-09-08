@@ -1,47 +1,49 @@
-import Channel from './Channel.js';
-import SimpleVideo from './SimpleVideo.js';
+import VideoList from './VideoList.js';
 import { getDataAPIs } from '../api.js';
-import VideoTest from './VideoTest.js';
-import Video from './Video.js';
 import Loading from './Loading.js';
+import VideoItem from './VideoItem.js';
 
 export default class VideoDetailPage {
   constructor({ $target, initialState, videoId }) {
     this.state = initialState;
     this.$videoDetailPage = $target;
     this.$videoDetailPage.className = this.state.className;
-    this.state = { video: [], simpleVideos: [], channelInfo: [] };
+    this.state = { video: [], videoLists: [], channelInfo: [] };
     this.loading = new Loading(this.$videoDetailPage);
     this.loading.show();
-    this.videoTest = new VideoTest({ $target: this.$videoDetailPage });
-    this.video = new Video({ $target: this.$videoDetailPage, video: this.state.video });
-    this.channel = new Channel({ $target: this.$videoDetailPage, initialState: { channelInfo: this.state.channelInfo } });
-    this.simpleVideo = new SimpleVideo({
+    this.videoItem = new VideoItem({
       $target: this.$videoDetailPage,
-      initalState: { className: 'videoList', videos: this.state.simpleVideos },
-      onClick: this.onNextVideoClick(videoId),
+      initialState: {
+        video: this.state.video,
+        channelInfo: this.state.channelInfo,
+      },
     });
+    this.videoList = new VideoList({
+      $target: this.$videoDetailPage,
+      initalState: { className: 'videoRow', videos: this.state.videoLists },
+    });
+    this.videoList.setClickEventListener(this.onNextVideoClick);
     this.init(videoId);
   }
 
   setState(nextState) {
     this.state = nextState;
-    this.video.setState(this.state.video);
-    this.channel.setState({ channelInfo: this.state.channelInfo });
-    this.simpleVideo.setState({ className: 'videoList', videos: this.state.simpleVideos });
+    this.videoItem.setState({ video: this.state.video, channelInfo: this.state.channelInfo });
+    this.videoList.setState({ className: 'videoRow', videos: this.state.videoLists });
   }
 
-  onNextVideoClick = async (videoId) => {
+  onNextVideoClick = async (event) => {
+    const $video = event.target.closest('.next');
+    const videoId = $video.dataset?.targetId;
     try {
-      initForm();
       const video = await this.getVideoInfo(videoId);
       const channelId = video.snippet.channelId;
       const channelInfo = await this.getChannelInfo(channelId);
-      const simpleVideos = await this.getVideoListInfo();
+      const videoLists = await this.getVideoListInfo();
       this.setState({
         ...this.state,
         video,
-        simpleVideos: simpleVideos,
+        videoLists: videoLists,
         channelInfo: channelInfo,
       });
     } catch (err) {
@@ -51,14 +53,14 @@ export default class VideoDetailPage {
 
   init = async (videoId) => {
     try {
-      initForm();
       const video = await this.getVideoInfo(videoId);
       const channelId = video.snippet.channelId;
       const channelInfo = await this.getChannelInfo(channelId);
-      const simpleVideos = await this.getVideoListInfo();
+      const videoLists = await this.getVideoListInfo();
       this.setState({
         ...this.state,
-        simpleVideos: simpleVideos,
+        video,
+        videoLists: videoLists,
         channelInfo: channelInfo,
       });
     } catch (err) {
@@ -105,41 +107,10 @@ export default class VideoDetailPage {
         maxResults: 3,
         regionCode: 'KR',
       };
-      const simpleVideos = await getDataAPIs('VIDEO', obj);
-      return simpleVideos.items;
+      const videoLists = await getDataAPIs('VIDEO', obj);
+      return videoLists.items;
     } catch (err) {
       console.log(err);
     }
   }
-}
-
-//초기화
-function initForm() {
-  const description = document.querySelector('.videoInfo .description .info');
-  const moreBtn = document.querySelector('.videoInfo .description .moreBtn');
-  const shortBtn = document.querySelector('.videoInfo .description .shortBtn');
-  description.classList.remove('clamp');
-  moreBtn.classList.remove('displayNone');
-  shortBtn.classList.remove('displayNone');
-  description.classList.add('clamp');
-  shortBtn.classList.add('displayNone');
-}
-
-/*+++++++++++++++ Buttons +++++++++++++++*/
-{
-  // const description = document.querySelector('.videoInfo .description .info');
-  // const moreBtn = document.querySelector('.videoInfo .description .moreBtn');
-  // const shortBtn = document.querySelector('.videoInfo .description .shortBtn');
-  // //더보기
-  // moreBtn.addEventListener('click', () => {
-  //   description.classList.toggle('clamp');
-  //   moreBtn.classList.toggle('displayNone');
-  //   shortBtn.classList.toggle('displayNone');
-  // });
-  // //간략히
-  // shortBtn.addEventListener('click', () => {
-  //   description.classList.toggle('clamp');
-  //   moreBtn.classList.toggle('displayNone');
-  //   shortBtn.classList.toggle('displayNone');
-  // });
 }
