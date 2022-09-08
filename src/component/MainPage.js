@@ -1,6 +1,7 @@
 import SimpleVideo from './SimpleVideo.js';
 import { getDataAPIs } from '../api.js';
 import { routeChange } from '../router.js';
+import Loading from './Loading.js';
 
 export default class MainPage {
   constructor({ $target, initialState }) {
@@ -8,6 +9,8 @@ export default class MainPage {
     this.$mainPage = $target;
     this.$mainPage.className = this.state.className;
     this.state = { simpleVideos: [], channelInfo: [] };
+    this.loading = new Loading(this.$mainPage);
+    this.loading.show();
     this.simpleVideo = new SimpleVideo({
       $target: this.$mainPage,
       initalState: { className: 'videoItem', videos: this.state.simpleVideos },
@@ -31,6 +34,8 @@ export default class MainPage {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      this.loading.hide();
     }
   };
 

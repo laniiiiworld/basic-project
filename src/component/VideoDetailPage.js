@@ -3,6 +3,7 @@ import SimpleVideo from './SimpleVideo.js';
 import { getDataAPIs } from '../api.js';
 import VideoTest from './VideoTest.js';
 import Video from './Video.js';
+import Loading from './Loading.js';
 
 export default class VideoDetailPage {
   constructor({ $target, initialState, videoId }) {
@@ -10,6 +11,8 @@ export default class VideoDetailPage {
     this.$videoDetailPage = $target;
     this.$videoDetailPage.className = this.state.className;
     this.state = { video: [], simpleVideos: [], channelInfo: [] };
+    this.loading = new Loading(this.$videoDetailPage);
+    this.loading.show();
     this.videoTest = new VideoTest({ $target: this.$videoDetailPage });
     this.video = new Video({ $target: this.$videoDetailPage, video: this.state.video });
     this.channel = new Channel({ $target: this.$videoDetailPage, initialState: { channelInfo: this.state.channelInfo } });
@@ -60,6 +63,8 @@ export default class VideoDetailPage {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      this.loading.hide();
     }
   };
 

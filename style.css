@@ -8,6 +8,7 @@
   --light-gray-color: #ececec;
   --medium-gray-color: #7e7e7e;
   --dark-gray-color: #606060;
+  --loading-color: #aeaeae;
 
   /* font-size */
   --logo-size: 1.5rem;
@@ -317,6 +318,31 @@ main .videoList {
 }
 .videoItem .next .infoAndIcon i {
   flex: var(--video-common-i);
+}
+/* +++++++++++++++++++ Loading +++++++++++++++++++ */
+.Loading .content {
+  width: 10px;
+  height: 10px;
+  left: 50%;
+  top: 50%;
+  position: fixed;
+  animation: rotatingCircle 1.5s 0.3s cubic-bezier(0.17, 0.37, 0.43, 0.67) infinite;
+  margin: 0 auto;
+  padding: 15px;
+  border: 7px dashed var(--loading-color);
+  border-radius: 100%;
+}
+
+@keyframes rotatingCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* +++++++++++++++++ media query +++++++++++++++++ */
