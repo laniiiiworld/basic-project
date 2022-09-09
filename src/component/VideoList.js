@@ -1,15 +1,12 @@
 export default class VideoList {
-  constructor({ $target, initalState, onClick }) {
+  constructor({ $target, initalState }) {
     this.state = initalState;
-    // this.onClick = onClick;
     this.$target = document.createElement('section');
     this.$target.className = this.state.className;
     $target.appendChild(this.$target);
 
     this.$target.addEventListener('click', (event) => {
       this.onClick && this.onClick(event);
-      // const $video = event.target.closest('.next');
-      // $video.dataset && this.onClick($video.dataset.targetId);
     });
   }
   setClickEventListener(onClick) {
