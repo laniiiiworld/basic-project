@@ -54,7 +54,6 @@
 
 body {
   font-family: 'Nanum Gothic', sans-serif;
-  cursor: pointer;
 }
 
 ul {
@@ -80,6 +79,11 @@ a {
 
 .displayNone {
   display: none;
+}
+
+header .logo,
+.next {
+  cursor: pointer;
 }
 
 /* +++++++++++++++++ header +++++++++++++++++ */
