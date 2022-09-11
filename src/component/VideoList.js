@@ -20,9 +20,10 @@ export default class VideoList {
   render() {
     const videos = this.state.videos;
     if (!videos) return;
+    // console.log(videos);
     const videoListHtml = `<ul>${videos
       .map(
-        (data) => `<li class="next" data-target-id="${data.id}" >
+        (data) => `<li class="next" data-target-id="${data.id?.videoId ? data.id.videoId : data.id}" >
                     <div class="img"><img src="${data.snippet.thumbnails.medium.url}" alt="" /></div>
                     <div class="infoAndIcon">
                       <div class="info">
