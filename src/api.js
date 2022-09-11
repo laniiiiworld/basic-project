@@ -1,10 +1,17 @@
 const SERVERLESS_URL = 'https://hide-with-serverless-functions.netlify.app/';
 const VIDEO_URL = `${SERVERLESS_URL}youtube/v3/videos?`;
 const CHANNEL_URL = `${SERVERLESS_URL}youtube/v3/channels?`;
+const SEARCH_URL = `${SERVERLESS_URL}youtube/v3/search?`;
 
 //API에서 데이터를 가져오는 함수
 export async function getDataAPIs(arg, obj) {
-  const url = arg === 'VIDEO' ? VIDEO_URL : CHANNEL_URL;
+  let url = VIDEO_URL;
+  if (arg === 'CHANNEL') {
+    url = CHANNEL_URL;
+  } else if (arg === 'SEARCH') {
+    url = SEARCH_URL;
+  }
+
   try {
     const res = await fetch(url + new URLSearchParams(obj));
     if (!res.ok) {

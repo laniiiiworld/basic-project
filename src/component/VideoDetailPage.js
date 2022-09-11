@@ -2,6 +2,7 @@ import VideoList from './VideoList.js';
 import { getDataAPIs } from '../api.js';
 import Loading from './Loading.js';
 import VideoItem from './VideoItem.js';
+import { routeChange } from '../router.js';
 
 export default class VideoDetailPage {
   constructor({ $target, initialState, videoId }) {
@@ -35,20 +36,7 @@ export default class VideoDetailPage {
   onNextVideoClick = async (event) => {
     const $video = event.target.closest('.next');
     const videoId = $video.dataset?.targetId;
-    try {
-      const video = await this.getVideoInfo(videoId);
-      const channelId = video.snippet.channelId;
-      const channelInfo = await this.getChannelInfo(channelId);
-      const videoLists = await this.getVideoListInfo();
-      this.setState({
-        ...this.state,
-        video,
-        videoLists: videoLists,
-        channelInfo: channelInfo,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    videoId && routeChange(`/detail/${videoId}`);
   };
 
   init = async (videoId) => {
@@ -102,6 +90,7 @@ export default class VideoDetailPage {
   async getVideoListInfo() {
     try {
       const obj = {
+        videoSyndicated: true,
         part: 'snippet',
         chart: 'mostPopular',
         maxResults: 3,

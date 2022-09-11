@@ -1,6 +1,7 @@
 import { init } from '../router.js';
 import Header from './Header.js';
 import MainPage from './MainPage.js';
+import VideoSearchPage from './VideoSearchPage.js';
 import VideoDetailPage from './VideoDetailPage.js';
 
 export default class App {
@@ -16,12 +17,16 @@ export default class App {
 
   route = () => {
     const { pathname } = location;
+    document.querySelector('.selectedKeyword').style.display = 'none';
+    document.querySelector('.keywordSearchInput').blur();
     this.$page.innerHTML = '';
     if (pathname === '/') {
       new MainPage({ $target: this.$page, initialState: { className: 'mainPage' } });
     } else if (pathname.indexOf('/detail') === 0) {
       const videoId = pathname.split('/')[2];
       new VideoDetailPage({ $target: this.$page, initialState: { className: 'videoDetailPage' }, videoId });
+    } else if (pathname.indexOf('/search') === 0) {
+      new VideoSearchPage({ $target: this.$page, initialState: { className: 'videoSearchPage' } });
     }
   };
 }

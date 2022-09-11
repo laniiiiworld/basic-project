@@ -3,17 +3,17 @@ import { getDataAPIs } from '../api.js';
 import { routeChange } from '../router.js';
 import Loading from './Loading.js';
 
-export default class MainPage {
+export default class VideoSearchPage {
   constructor({ $target, initialState }) {
     this.state = initialState;
-    this.$mainPage = $target;
-    this.$mainPage.className = this.state.className;
+    this.$videoSearchPage = $target;
+    this.$videoSearchPage.className = this.state.className;
     this.state = { videoLists: [], channelInfo: [] };
-    this.loading = new Loading(this.$mainPage);
+    this.loading = new Loading(this.$videoSearchPage);
     this.loading.show();
     this.videoList = new VideoList({
-      $target: this.$mainPage,
-      initalState: { className: 'videoColumn', videos: this.state.videoLists },
+      $target: this.$videoSearchPage,
+      initalState: { className: 'videoRow', videos: this.state.videoLists },
     });
     this.videoList.setClickEventListener(this.onNextVideoClick);
     this.init();
@@ -21,13 +21,14 @@ export default class MainPage {
 
   setState(nextState) {
     this.state = nextState;
-    this.videoList.setState({ className: 'videoColumn', videos: this.state.videoLists });
+    this.videoList.setState({ className: 'videoRow', videos: this.state.videoLists });
   }
 
   init = async () => {
     try {
+      const keyword = document.querySelector('.keywordSearchInput').value;
       const channelInfo = [];
-      const videoLists = await this.getVideoListInfo();
+      const videoLists = await this.getVideoListInfo(keyword);
       this.setState({
         ...this.state,
         videoLists: videoLists,
@@ -41,16 +42,18 @@ export default class MainPage {
   };
 
   //API에서 추천동영상 정보를 가져오는 함수
-  async getVideoListInfo() {
+  async getVideoListInfo(keyword) {
+    const obj = {
+      videoSyndicated: true, //외부에서 재생할 수 있는 동영상만 포함
+      part: 'snippet',
+      chart: 'mostPopular',
+      maxResults: 5,
+      regionCode: 'KR',
+      type: 'video',
+      q: keyword,
+    };
     try {
-      const obj = {
-        videoSyndicated: true,
-        part: 'snippet',
-        chart: 'mostPopular',
-        maxResults: 5,
-        regionCode: 'KR',
-      };
-      const videoLists = await getDataAPIs('VIDEO', obj);
+      const videoLists = await getDataAPIs('SEARCH', obj);
       return videoLists.items;
     } catch (err) {
       console.log(err);
