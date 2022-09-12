@@ -133,8 +133,8 @@ header .keywordSearchArea .keywordSearchBtn {
   font-size: var(--Large-size);
   padding: 0 calc(var(--Large-space) * 2);
   border: 1px solid var(--search-border-color);
-  border-left-width: 0;
   background-color: var(--none-white-color);
+  color: var(--black-color);
 }
 header .keywordSearchArea .keywordSearchBtn:hover {
   background-color: var(--light-gray-color);
