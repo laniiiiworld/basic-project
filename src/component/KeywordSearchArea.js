@@ -1,6 +1,7 @@
 import KeywordSearch from './KeywordSearch.js';
 import SelectedKeyword from './SelectedKeyword.js';
 import { routeChange } from '../router.js';
+import { getSelectedKeywords, setSelectedKeywords, setSelectedKeyword, removeSelectedKeyword } from '../storage.js';
 
 export default class KeywordSearchArea {
   constructor({ $target }) {
@@ -22,12 +23,19 @@ export default class KeywordSearchArea {
 
     //최근검색어 클릭시 이벤트 처리
     $target.addEventListener('click', (event) => {
-      if (event.target.tagName === 'LI') {
+      const selectIndex = Number(event.target.dataset?.index);
+      const deleteIndex = Number(event.target.dataset?.deleteIndex);
+      if (selectIndex >= 0) {
+        const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
         const keywordSearchInput = document.querySelector('.keywordSearchInput');
-        const index = Number(event.target.dataset.index);
-        const items = ['테스트', '클론코딩', '유튜브', 'JavaScript', 'TypeScript'];
-        keywordSearchInput.value = items[index];
+        const index = selectIndex;
+        keywordSearchInput.value = selectedKeywords[index];
+        setSelectedKeyword('selectedKeywords', keywordSearchInput.value);
         routeChange(`/search`);
+      } else if (deleteIndex >= 0) {
+        const nextSelectedKeywords = removeSelectedKeyword('selectedKeywords', deleteIndex);
+        setSelectedKeywords('selectedKeywords', nextSelectedKeywords);
+        this.setState({ selectedKeywords: nextSelectedKeywords });
       }
     });
 
@@ -37,8 +45,8 @@ export default class KeywordSearchArea {
       if (!navigationKeys.includes(event.key)) {
         return;
       }
-      //최근검색어들 storage로 변경 필요
-      const items = ['테스트', '클론코딩', '유튜브', 'JavaScript', 'TypeScript'];
+      const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
+      const items = selectedKeywords;
       if (!items.length) {
         return;
       }
@@ -56,6 +64,7 @@ export default class KeywordSearchArea {
       const keywordSearchInput = document.querySelector('.keywordSearchInput');
       if (event.key === 'Enter') {
         //Enter로 검색
+        setSelectedKeyword('selectedKeywords', keywordSearchInput.value);
         routeChange(`/search`);
       } else {
         //최근검색어 위아래 키보드로 이동
@@ -84,6 +93,6 @@ export default class KeywordSearchArea {
   }
 
   onSearchInputFocus = () => {
-    this.setState({ selectedKeywords: ['테스트', '클론코딩', '유튜브', 'JavaScript', 'TypeScript'] });
+    this.setState({ selectedKeywords: getSelectedKeywords('selectedKeywords', []) });
   };
 }

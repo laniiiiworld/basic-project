@@ -155,10 +155,22 @@ header .keywordSearchArea .keywordSearchBtn:hover {
 }
 
 .selectedKeyword li {
-  padding: var(--medium-space);
+  padding: 0 var(--medium-space);
   cursor: pointer;
   width: 100%;
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+.selectedKeyword ul li span {
+  padding: var(--medium-space);
+}
+.selectedKeyword ul li a {
+  font-size: var(--small-size);
+  padding: var(--medium-space);
+}
+
+.selectedKeyword ul li a:hover {
+  text-decoration: underline;
 }
 
 .keywordItemSelected {

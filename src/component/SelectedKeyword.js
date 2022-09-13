@@ -1,5 +1,3 @@
-import { routeChange } from '../router.js';
-
 export default class SelectedKeyword {
   constructor({ $target, initialState }) {
     this.$element = document.createElement('div');
@@ -13,11 +11,13 @@ export default class SelectedKeyword {
 
     //최근검색어에 마우스를 올린 경우 제어
     this.$element.addEventListener('mouseover', (event) => {
-      const nextIndex = Number(event.target.dataset.index);
-      const $nowLi = document.querySelector('.keywordItemSelected');
-      const $nextLi = document.querySelector(`.selectedKeyword ul li[data-index='${nextIndex}']`);
-      $nowLi && $nowLi.classList.remove('keywordItemSelected');
-      $nextLi && $nextLi.classList.add('keywordItemSelected');
+      const nextIndex = Number(event.target.dataset?.index);
+      if (nextIndex >= 0) {
+        const $nowLi = document.querySelector('.keywordItemSelected');
+        const $nextLi = document.querySelector(`.selectedKeyword ul li[data-index='${nextIndex}']`);
+        $nowLi && $nowLi.classList.remove('keywordItemSelected');
+        $nextLi && $nextLi.classList.add('keywordItemSelected');
+      }
     });
   }
 
@@ -41,7 +41,7 @@ export default class SelectedKeyword {
     this.$element.style.display = 'block';
     this.$element.innerHTML = `
         <ul>
-        ${items.map((item, index) => `<li class="" data-index="${index}">${item}</li>`).join('')}
+        ${items.map((item, index) => `<li data-index="${index}"><span>${item}</span><a href="javascript:void(0);" data-delete-index="${index}">삭제</a></li>`).join('')}
         </ul>
       `;
   };

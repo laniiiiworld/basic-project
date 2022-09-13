@@ -1,4 +1,5 @@
 import { routeChange } from '../router.js';
+import { setSelectedKeyword } from '../storage.js';
 
 export default class KeywordSearch {
   constructor({ $target, initialState }) {
@@ -17,6 +18,7 @@ export default class KeywordSearch {
     });
     //검색
     keywordSearchBtn.addEventListener('click', (event) => {
+      setSelectedKeyword('selectedKeywords', keywordSearchInput.value);
       routeChange(`/search`);
     });
   }
