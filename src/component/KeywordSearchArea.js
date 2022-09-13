@@ -45,35 +45,37 @@ export default class KeywordSearchArea {
       if (!navigationKeys.includes(event.key)) {
         return;
       }
+
+      const keywordSearchInput = document.querySelector('.keywordSearchInput');
       const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
-      const items = selectedKeywords;
-      if (!items.length) {
-        return;
-      }
 
       let $nowLi = document.querySelector('.keywordItemSelected');
-      const lastIndex = items.length - 1;
+      const lastIndex = selectedKeywords.length - 1;
       let selectedIndex;
       let nextIndex;
+
       if ($nowLi) {
         selectedIndex = Number($nowLi.dataset.index);
       } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-        selectedIndex = event.key === 'ArrowUp' ? lastIndex : 0;
+        selectedIndex = event.key === 'ArrowUp' ? lastIndex + 1 : -1;
       }
 
-      const keywordSearchInput = document.querySelector('.keywordSearchInput');
       if (event.key === 'Enter') {
         //Enter로 검색
         setSelectedKeyword('selectedKeywords', keywordSearchInput.value);
         routeChange(`/search`);
       } else {
+        if (!selectedKeywords.length) {
+          return;
+        }
+
         //최근검색어 위아래 키보드로 이동
         if (event.key === 'ArrowUp') {
           nextIndex = selectedIndex === 0 ? lastIndex : selectedIndex - 1;
         } else if (event.key === 'ArrowDown') {
           nextIndex = selectedIndex === lastIndex ? 0 : selectedIndex + 1;
         }
-        keywordSearchInput.value = items[nextIndex];
+        keywordSearchInput.value = selectedKeywords[nextIndex];
       }
 
       const $nextLi = document.querySelector(`.selectedKeyword ul li[data-index='${nextIndex}']`);
