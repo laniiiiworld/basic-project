@@ -116,6 +116,9 @@ header .keywordSearchArea {
   flex: var(--flex-header-center);
   text-align: center;
 }
+header .keywordSearchArea div {
+  display: inline-block;
+}
 header .keywordSearchArea .keywordSearchInput {
   width: 35vw;
   height: calc(var(--Large-size) * 2);
@@ -145,7 +148,6 @@ header .keywordSearchArea .keywordSearchBtn:hover {
   background-color: var(--white-color);
   box-shadow: 1px 1px 3px gray;
   position: absolute;
-  transform: translate(calc(50% + 30px), 0);
   width: 35vw;
   font-size: var(--medium-size);
 }

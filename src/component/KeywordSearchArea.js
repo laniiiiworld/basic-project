@@ -8,21 +8,23 @@ export default class KeywordSearchArea {
     this.state = {
       selectedKeywords: [],
     };
+    this.$element = document.createElement('div');
+    $target.appendChild(this.$element);
 
     this.keywordSearch = new KeywordSearch({
-      $target,
+      $target: this.$element,
       initialState: '',
     });
     this.keywordSearch.setFocusEventListener(this.onSearchInputFocus);
     this.selectedKeyword = new SelectedKeyword({
-      $target,
+      $target: this.$element,
       initialState: {
         items: [],
       },
     });
 
     //최근검색어 클릭시 이벤트 처리
-    $target.addEventListener('click', (event) => {
+    this.$element.addEventListener('click', (event) => {
       const selectIndex = Number(event.target.dataset?.index);
       const deleteIndex = Number(event.target.dataset?.deleteIndex);
       if (selectIndex >= 0) {
@@ -40,7 +42,7 @@ export default class KeywordSearchArea {
     });
 
     //Enter로 검색, 최근검색어 위아래 키보드로 이동
-    $target.addEventListener('keyup', (event) => {
+    this.$element.addEventListener('keyup', (event) => {
       const navigationKeys = ['Enter', 'ArrowUp', 'ArrowDown'];
       if (!navigationKeys.includes(event.key)) {
         return;
