@@ -45,10 +45,11 @@ export default class VideoSearchPage {
   async getVideoListInfo(keyword) {
     const obj = {
       videoSyndicated: true, //외부에서 재생할 수 있는 동영상만 포함
+      safeSearch: 'strict',
       part: 'snippet',
       chart: 'mostPopular',
       maxResults: 5,
-      regionCode: 'KR',
+      regionCode: 'kr',
       type: 'video',
       q: keyword,
     };
@@ -56,7 +57,7 @@ export default class VideoSearchPage {
       const videoLists = await getDataAPIs('SEARCH', obj);
       return videoLists.items;
     } catch (err) {
-      console.log(err);
+      this.$videoSearchPage.innerHTML = err;
     }
   }
 
