@@ -1,95 +1,3 @@
-/* +++++++++++++++++ common +++++++++++++++++ */
-:root {
-  /* color */
-  --red-color: #ff0000;
-  --white-color: #ffffff;
-  --none-white-color: #f8f8f8;
-  --black-color: #030303;
-  --blue-color: #095ed4;
-  --light-gray-color: #ececec;
-  --medium-gray-color: #7e7e7e;
-  --dark-gray-color: #606060;
-  --loading-color: #aeaeae;
-  --search-border-color: #cccccc;
-
-  /* font-size */
-  --logo-size: 1.5rem;
-  --XLarge-size: 1.4rem;
-  --Large-size: 1.2rem;
-  --medium-size: 1rem;
-  --small-size: 0.8rem;
-
-  /* size */
-  --video-player-width: 70vw;
-  --video-player-small: 45vh;
-  --video-player-medium: 45vh;
-  --video-player-large: 60vh;
-  --user-size: 2.6rem;
-
-  /* space */
-  --Large-space: 0.7rem;
-  --medium-space: 0.5rem;
-  --small-space: 0.3rem;
-
-  /* flex box 비율 */
-  --flex-header-left: 1 1 10vw;
-  --flex-header-center: 1 1 80vw;
-  --flex-header-right: 1 1 10vw;
-  --flex-left: 1 1 70%;
-  --flex-right: 1 1 30%;
-  --flex-main-left: 1 1 60vw;
-  --flex-main-right: 1 1 40vw;
-
-  /* video common */
-  --video-common-info: 1 1 95vw;
-  --video-common-i: 1 1 5vw;
-
-  /* video list(row) */
-  --video-list-img: 1 1 40vw;
-  --video-list-infoAndIcon: 1 1 60vw;
-  --video-list-img-width: 155px;
-  --video-list-img-height: auto;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Nanum Gothic', sans-serif;
-}
-
-ul {
-  list-style: none;
-}
-
-hr {
-  border: none;
-  height: 1px;
-  background-color: var(--light-gray-color);
-}
-
-button {
-  border: none;
-  outline: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-a {
-  text-decoration-line: none;
-}
-
-input {
-  outline: none;
-}
-
-.displayNone {
-  display: none;
-}
-
 header .logo,
 .next {
   cursor: pointer;
@@ -202,8 +110,18 @@ main .videoRow {
 main .videoArea {
   flex: var(--flex-main-left);
 }
-main .videoList {
+/* main .videoList {
   flex: var(--flex-main-right);
+} */
+.videoList {
+  display: grid;
+}
+.videoList.grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.videoList.list {
+  grid-template-columns: repeat(1, 1fr);
 }
 /* +++++++++++++++++ video player +++++++++++++++++ */
 .videoPlayer {
@@ -323,32 +241,32 @@ main .videoList {
   color: var(--dark-gray-color);
 }
 /* +++++++++++ video list&item common +++++++++++ */
-.next .img img {
+.videoItem .img img {
   width: 100%;
   height: 100%;
 }
-.next .infoAndIcon {
+.videoItem .infoAndIcon {
   display: flex;
 }
-.next .infoAndIcon .info {
+.videoItem .infoAndIcon .info {
   display: flex;
   flex-direction: column;
 }
-.next .infoAndIcon .info .title {
+.videoItem .infoAndIcon .info .title {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
-.next .infoAndIcon .info .title {
+.videoItem .infoAndIcon .info .title {
   font-size: var(--medium-size);
   font-weight: bold;
 }
-.next .infoAndIcon .info .name {
+.videoItem .infoAndIcon .info .name {
   font-size: var(--small-size);
   color: var(--dark-gray-color);
 }
-.next .infoAndIcon .info .hitsAndDays {
+.videoItem .infoAndIcon .info .hitsAndDays {
   font-size: var(--small-size);
   color: var(--dark-gray-color);
 }
@@ -431,46 +349,35 @@ main .videoList {
 }
 
 /* +++++++++++++++++ media query +++++++++++++++++ */
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: var(--media-query-large)) {
   main {
     flex-direction: row;
   }
-  .videoRow ul {
-    display: block;
-  }
-  .videoColumn ul {
-    grid-template-columns: repeat(5, 1fr);
+  .videoList.grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: var(--media-query-medium)) {
   main {
     flex-direction: column;
   }
   .videoPlayer {
     position: static;
   }
-  .videoRow ul {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .videoColumn ul {
+  .videoList.grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: var(--media-query-small)) {
   .videoPlayer {
     position: sticky;
   }
-  .videoRow ul {
-  }
-  .videoColumn ul {
+  .videoList.grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media only screen and (max-width: 480px) {
-  .videoRow ul {
-  }
-  .videoColumn ul {
+  .videoList.grid {
     grid-template-columns: repeat(1, 1fr);
   }
 }

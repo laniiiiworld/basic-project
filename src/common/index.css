@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: var(--light-gray-color);
+}
+
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+a {
+  text-decoration-line: none;
+}
+
+input {
+  outline: none;
+}
+
+.displayNone {
+  display: none;
+}
