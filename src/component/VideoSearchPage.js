@@ -1,6 +1,6 @@
 import VideoList from './videoList.js';
 import { routeChange } from '../router.js';
-import Loading from './Loading.js';
+import Loading from './loading.js';
 
 export default class VideoSearchPage {
   constructor({ $target, initialState, youtube }) {

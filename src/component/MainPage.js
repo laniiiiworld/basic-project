@@ -1,5 +1,5 @@
 import VideoList from './videoList.js';
-import Loading from './Loading.js';
+import Loading from './loading.js';
 
 export default class MainPage {
   constructor({ $target, initialState, youtube }) {

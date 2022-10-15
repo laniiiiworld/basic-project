@@ -1,5 +1,5 @@
-import KeywordSearch from './KeywordSearch.js';
-import SelectedKeyword from './SelectedKeyword.js';
+import KeywordSearch from './keywordSearch.js';
+import SelectedKeyword from './selectedKeyword.js';
 import { routeChange } from '../router.js';
 import { getSelectedKeywords, setSelectedKeywords, setSelectedKeyword, removeSelectedKeyword } from '../storage.js';
 

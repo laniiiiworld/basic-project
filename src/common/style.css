@@ -1,5 +1,5 @@
 header .logo,
-.next {
+.videoItem {
   cursor: pointer;
 }
 
@@ -7,47 +7,53 @@ header .logo,
 header {
   display: flex;
   justify-content: space-between;
-  padding: var(--Large-space);
   align-items: center;
+  padding: var(--medium-space);
+  padding-top: var(--Large-space);
 }
 header .logo {
-  flex: var(--flex-header-left);
-  font-size: var(--logo-size);
-  min-width: 105px;
-  letter-spacing: -3px;
+  display: flex;
+  align-items: center;
+  font-size: var(--XXLarge-size);
+  letter-spacing: -0.14rem;
+  margin-right: var(--small-space);
+  color: var(--black-color);
+}
+header .logo:hover {
+  cursor: pointer;
 }
 header .logo i {
   color: var(--red-color);
+  width: var(--XXXLarge-size);
+  margin-right: calc(small-space/2);
 }
-
 header .keywordSearchArea {
-  flex: var(--flex-header-center);
   text-align: center;
 }
-header .keywordSearchArea div {
-  display: inline-block;
+header .keywordSearchArea keywordSearch {
+  display: flex;
+  height: calc(var(--XXXLarge-size) * 1.1);
 }
-header .keywordSearchArea .keywordSearchInput {
-  width: 35vw;
-  height: calc(var(--Large-size) * 2);
-  font-size: var(--Large-size);
-  padding-left: var(--medium-space);
-  border: 1px solid var(--search-border-color);
+header .keywordSearchArea .keywordSearch .input {
+  width: calc(var(--XXXLarge-size) * 10);
+  font-size: calc(var(--Large-size));
+  border: solid var(--search-border-color);
+  padding: var(--small-space) calc(var(--small-space) * 4);
 }
-header .keywordSearchArea .keywordSearchInput:focus {
-  width: calc(35vw - 1px);
+header .keywordSearchArea .keywordSearch .input:focus {
+  width: calc(var(--XXXLarge-size) * 10 - 1px);
   margin-right: 1px;
   outline: var(--blue-color) solid 1px;
 }
-header .keywordSearchArea .keywordSearchBtn {
-  height: calc(var(--Large-size) * 2);
-  font-size: var(--Large-size);
-  padding: 0 calc(var(--Large-space) * 2);
-  border: 1px solid var(--search-border-color);
+header .keywordSearchArea .keywordSearch .button {
   background-color: var(--none-white-color);
+  padding: var(--small-space) calc(var(--small-space) * 4);
+  border: solid var(--search-border-color);
+  cursor: pointer;
+  font-size: var(--Large-size);
   color: var(--black-color);
 }
-header .keywordSearchArea .keywordSearchBtn:hover {
+header .keywordSearchArea .keywordSearch .button:hover {
   background-color: var(--light-gray-color);
 }
 
@@ -56,7 +62,7 @@ header .keywordSearchArea .keywordSearchBtn:hover {
   background-color: var(--white-color);
   box-shadow: 1px 1px 3px gray;
   position: absolute;
-  width: 35vw;
+  width: calc(var(--XXXLarge-size) * 10 - 1px);
   font-size: var(--medium-size);
 }
 
@@ -88,27 +94,34 @@ header .keywordSearchArea .keywordSearchBtn:hover {
 }
 
 header .icons {
-  flex: var(--flex-header-right);
-  text-align: right;
+  width: calc(XXXLarge-size * 2);
 }
+
+/* 
 .icons i {
   font-size: var(--XLarge-size);
   padding-left: var(--medium-space);
-}
+} */
 /* +++++++++++++++++ video Area(main) +++++++++++++++++ */
 main {
   background-color: var(--none-white-color);
+}
+main.videoSearchPage {
+  padding: var(--Large-space);
+}
+main.videoDetailPage {
   display: flex;
   flex-direction: row;
 }
-main .videoArea {
-  flex: var(--flex-main-left);
+
+/* +++++++++++++++++ video detail page +++++++++++++++++ */
+.videoDetailPage .content {
+  flex: 1 1 70%;
+  padding: var(--XLarge-space) var(--Large-space) var(--XLarge-space) var(--XLarge-space);
 }
-main .videoRow {
-  flex: var(--flex-main-right);
-}
-main .videoArea {
-  flex: var(--flex-main-left);
+.videoDetailPage .list {
+  flex: 1 1 30%;
+  padding: var(--Large-space) var(--Large-space) var(--Large-space) 0;
 }
 
 /* +++++++++++++++++ video player +++++++++++++++++ */
@@ -310,17 +323,14 @@ main .videoArea {
 
 /* +++++++++++++++++ media query +++++++++++++++++ */
 @media only screen and (max-width: var(--media-query-large)) {
-  main {
-    flex-direction: row;
+  main.videoDetailPage {
+    flex-direction: column;
   }
   .videoList.grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 @media only screen and (max-width: var(--media-query-medium)) {
-  main {
-    flex-direction: column;
-  }
   .videoPlayer {
     position: static;
   }

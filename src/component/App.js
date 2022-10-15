@@ -1,5 +1,5 @@
 import { init } from '../router.js';
-import Header from './Header.js';
+import Header from './header.js';
 import MainPage from './mainPage.js';
 import VideoSearchPage from './videoSearchPage.js';
 import VideoDetailPage from './videoDetailPage.js';
@@ -19,7 +19,7 @@ export default class App {
   route = () => {
     const { pathname } = location;
     document.querySelector('.selectedKeyword').style.display = 'none';
-    document.querySelector('.keywordSearchInput').blur();
+    document.querySelector('.keywordSearch .input').blur();
     this.$page.innerHTML = '';
     if (pathname === '/') {
       new MainPage({ $target: this.$page, initialState: { className: 'mainPage' }, youtube: this.youtube });

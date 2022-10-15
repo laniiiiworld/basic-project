@@ -10,8 +10,8 @@ export default class KeywordSearch {
 
     this.render();
 
-    const keywordSearchInput = document.querySelector('.keywordSearchInput');
-    const keywordSearchBtn = document.querySelector('.keywordSearchBtn');
+    const keywordSearchInput = document.querySelector('.keywordSearch .input');
+    const keywordSearchBtn = document.querySelector('.keywordSearch .button');
     //검색어 입력란 focus
     keywordSearchInput.addEventListener('focus', (event) => {
       this.onFocus && this.onFocus(event);
@@ -29,7 +29,7 @@ export default class KeywordSearch {
 
   render() {
     this.$element.innerHTML = `
-            <input class="keywordSearchInput" type="text" placeholder="검색" /><button class="keywordSearchBtn"><i class="fa fa-magnifying-glass"></i></button>
+            <input class="input" type="text" placeholder="검색" /><button class="button"><i class="fa fa-magnifying-glass"></i></button>
           `;
   }
 }

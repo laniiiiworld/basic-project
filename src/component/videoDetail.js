@@ -1,7 +1,7 @@
 import Video from './video.js';
 import Channel from './channel.js';
 
-export default class VideoItem {
+export default class VideoDetail {
   constructor({ $target, initialState }) {
     this.$target = $target;
     this.state = initialState;
@@ -36,9 +36,13 @@ export default class VideoItem {
 
   render() {
     this.$target.innerHTML = `      
-    <article class="videoArea">
+    <article class="content">
       <section class="videoPlayer">
-        <iframe src="" frameborder="0"></iframe>
+        <iframe 
+          src=""
+          frameborder='0'
+          allowfullscreen
+        ></iframe>
       </section>
       <!-- ++++++++++++++++++ video info ++++++++++++++++++ -->
       <section class="videoInfo">

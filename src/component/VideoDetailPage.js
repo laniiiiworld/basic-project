@@ -1,7 +1,6 @@
 import VideoList from './videoList.js';
-import Loading from './Loading.js';
-import videoDetail from './videoDetail.js';
-import { routeChange } from '../router.js';
+import Loading from './loading.js';
+import VideoDetail from './videoDetail.js';
 
 export default class VideoDetailPage {
   constructor({ $target, initialState, videoId, youtube }) {
@@ -12,7 +11,7 @@ export default class VideoDetailPage {
     this.state = { video: [], videoLists: [], channelInfo: [] };
     this.loading = new Loading(this.$videoDetailPage);
     this.loading.show();
-    this.videoDetail = new videoDetail({
+    this.videoDetail = new VideoDetail({
       $target: this.$videoDetailPage,
       initialState: {
         video: this.state.video,

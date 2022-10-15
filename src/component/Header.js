@@ -1,5 +1,5 @@
 import { routeChange } from '../router.js';
-import KeywordSearchArea from './KeywordSearchArea.js';
+import KeywordSearchArea from './keywordSearchArea.js';
 
 export default class Header {
   constructor({ $target, initialState }) {
