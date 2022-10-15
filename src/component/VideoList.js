@@ -1,41 +1,32 @@
+import VideoItem from './VideoItem.js';
+import { routeChange } from '../router.js';
+
 export default class VideoList {
-  constructor({ $target, initalState }) {
-    this.state = initalState;
-    this.$target = document.createElement('section');
+  constructor({ $target, initialState }) {
+    this.state = initialState;
+    this.$target = document.createElement('ul');
     this.$target.className = this.state.className;
     $target.appendChild(this.$target);
 
     this.$target.addEventListener('click', (event) => {
-      this.onClick && this.onClick(event);
+      const $video = event.target.closest('.videoItem');
+      const videoId = $video.dataset?.targetId;
+      videoId && routeChange(`/detail/${videoId}`);
     });
-  }
-  setClickEventListener(onClick) {
-    this.onClick = onClick;
   }
 
   setState(nextState) {
     this.state = nextState;
     this.render();
   }
+
   render() {
     const videos = this.state.videos;
+    const displayType = this.$target.className.indexOf('list') > -1 ? 'row' : 'column';
     if (!videos) return;
-    // console.log(videos);
-    const videoListHtml = `<ul>${videos
-      .map(
-        (data) => `<li class="next" data-target-id="${data.id?.videoId ? data.id.videoId : data.id}" >
-                    <div class="img"><img src="${data.snippet.thumbnails.medium.url}" alt="" /></div>
-                    <div class="infoAndIcon">
-                      <div class="info">
-                        <span class="title">${data.snippet.title}</span>
-                        <span class="name">${data.snippet.channelTitle}</span>
-                      </div>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                  </li>
-                  `
-      )
-      .join('')}</ul>`;
-    this.$target.innerHTML = videoListHtml;
+    this.$target.innerHTML = '';
+    videos.map((video) => {
+      return new VideoItem({ $target: this.$target, initialState: { className: `videoItem ${displayType}`, video } });
+    });
   }
 }

@@ -1,4 +1,4 @@
-import VideoList from './VideoList.js';
+import VideoList from './videoList.js';
 import { routeChange } from '../router.js';
 import Loading from './Loading.js';
 
@@ -13,15 +13,14 @@ export default class VideoSearchPage {
     this.loading.show();
     this.videoList = new VideoList({
       $target: this.$videoSearchPage,
-      initalState: { className: 'videoRow', videos: this.state.videoLists },
+      initialState: { className: 'videoList list', videos: this.state.videoLists },
     });
-    this.videoList.setClickEventListener(this.onNextVideoClick);
     this.init();
   }
 
   setState(nextState) {
     this.state = nextState;
-    this.videoList.setState({ className: 'videoRow', videos: this.state.videoLists });
+    this.videoList.setState({ className: 'videoList list', videos: this.state.videoLists });
   }
 
   init = async () => {
@@ -39,11 +38,5 @@ export default class VideoSearchPage {
     } finally {
       this.loading.hide();
     }
-  };
-
-  onNextVideoClick = (event) => {
-    const $video = event.target.closest('.next');
-    const videoId = $video?.dataset?.targetId;
-    videoId && routeChange(`/detail/${videoId}`);
   };
 }

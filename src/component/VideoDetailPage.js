@@ -1,6 +1,6 @@
-import VideoList from './VideoList.js';
+import VideoList from './videoList.js';
 import Loading from './Loading.js';
-import VideoItem from './VideoItem.js';
+import videoDetail from './videoDetail.js';
 import { routeChange } from '../router.js';
 
 export default class VideoDetailPage {
@@ -12,7 +12,7 @@ export default class VideoDetailPage {
     this.state = { video: [], videoLists: [], channelInfo: [] };
     this.loading = new Loading(this.$videoDetailPage);
     this.loading.show();
-    this.videoItem = new VideoItem({
+    this.videoDetail = new videoDetail({
       $target: this.$videoDetailPage,
       initialState: {
         video: this.state.video,
@@ -21,23 +21,16 @@ export default class VideoDetailPage {
     });
     this.videoList = new VideoList({
       $target: this.$videoDetailPage,
-      initalState: { className: 'videoRow', videos: this.state.videoLists },
+      initialState: { className: 'videoList list', videos: this.state.videoLists },
     });
-    this.videoList.setClickEventListener(this.onNextVideoClick);
     this.init(videoId);
   }
 
   setState(nextState) {
     this.state = nextState;
-    this.videoItem.setState({ video: this.state.video, channelInfo: this.state.channelInfo });
-    this.videoList.setState({ className: 'videoRow', videos: this.state.videoLists });
+    this.videoDetail.setState({ video: this.state.video, channelInfo: this.state.channelInfo });
+    this.videoList.setState({ className: 'videoList list', videos: this.state.videoLists });
   }
-
-  onNextVideoClick = async (event) => {
-    const $video = event.target.closest('.next');
-    const videoId = $video.dataset?.targetId;
-    videoId && routeChange(`/detail/${videoId}`);
-  };
 
   init = async (videoId) => {
     try {

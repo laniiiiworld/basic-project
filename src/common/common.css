@@ -4,54 +4,49 @@
   --red-color: #ff0000;
   --white-color: #ffffff;
   --none-white-color: #f8f8f8;
-  --black-color: #030303;
-  --blue-color: #095ed4;
   --light-gray-color: #ececec;
   --medium-gray-color: #7e7e7e;
   --dark-gray-color: #606060;
+  --black-color: #030303;
   --loading-color: #aeaeae;
   --search-border-color: #cccccc;
+  --blue-color: #095ed4;
 
-  /* font-size */
-  --logo-size: 1.5rem;
+  /* size */
+  --thumbnail-small: 15rem;
+  --XXXLarge-size: 2rem;
+  --XXLarge-size: 1.6rem;
   --XLarge-size: 1.4rem;
   --Large-size: 1.2rem;
   --medium-size: 1rem;
   --small-size: 0.8rem;
 
-  /* size */
-  --video-player-width: 70vw;
-  --video-player-small: 45vh;
-  --video-player-medium: 45vh;
-  --video-player-large: 60vh;
-  --user-size: 2.6rem;
-
   /* space */
-  --Large-space: 0.7rem;
-  --medium-space: 0.5rem;
-  --small-space: 0.3rem;
-
-  /* flex box 비율 */
-  --flex-header-left: 1 1 10vw;
-  --flex-header-center: 1 1 80vw;
-  --flex-header-right: 1 1 10vw;
-  --flex-left: 1 1 70%;
-  --flex-right: 1 1 30%;
-  --flex-main-left: 1 1 60vw;
-  --flex-main-right: 1 1 40vw;
-
-  /* video common */
-  --video-common-info: 1 1 95vw;
-  --video-common-i: 1 1 5vw;
-
-  /* video list(row) */
-  --video-list-img: 1 1 40vw;
-  --video-list-infoAndIcon: 1 1 60vw;
-  --video-list-img-width: 155px;
-  --video-list-img-height: auto;
+  --XLarge-space: 1em;
+  --Large-space: 0.6em;
+  --medium-space: 0.4em;
+  --small-space: 0.2em;
 
   /* media query */
   --media-query-large: 992px;
   --media-query-medium: 768px;
   --media-query-small: 576px;
+
+  /* video Detail */
+  --video-detail-left: 1 1 70%;
+  --video-detail-right: 1 1 30%;
+
+  /* video-player size */
+  --video-player-large: 30rem;
+  --video-player-medium: 25rem;
+  --video-player-small: 20rem;
+
+  /* channel info */
+  --channel-info-left: 1 1 70%;
+  --channel-info-right: 1 1 30%;
+  --user-size: 2.6rem;
+
+  /* video Item */
+  --video-item-left: 1 1 30%;
+  --video-item-right: 1 1 70%;
 }

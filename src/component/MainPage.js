@@ -1,5 +1,4 @@
-import VideoList from './VideoList.js';
-import { routeChange } from '../router.js';
+import VideoList from './videoList.js';
 import Loading from './Loading.js';
 
 export default class MainPage {
@@ -13,15 +12,14 @@ export default class MainPage {
     this.loading.show();
     this.videoList = new VideoList({
       $target: this.$mainPage,
-      initalState: { className: 'videoColumn', videos: this.state.videoLists },
+      initialState: { className: 'videoList grid', videos: this.state.videoLists },
     });
-    this.videoList.setClickEventListener(this.onNextVideoClick);
     this.init();
   }
 
   setState(nextState) {
     this.state = nextState;
-    this.videoList.setState({ className: 'videoColumn', videos: this.state.videoLists });
+    this.videoList.setState({ className: 'videoList grid', videos: this.state.videoLists });
   }
 
   init = async () => {
@@ -38,11 +36,5 @@ export default class MainPage {
     } finally {
       this.loading.hide();
     }
-  };
-
-  onNextVideoClick = (event) => {
-    const $video = event.target.closest('.next');
-    const videoId = $video?.dataset?.targetId;
-    videoId && routeChange(`/detail/${videoId}`);
   };
 }
