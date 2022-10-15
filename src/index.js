@@ -1,3 +1,5 @@
-import App from './component/App.js';
+import App from './component/app.js';
+import Youtube from './service/youtube.js';
 
-new App(document.querySelector('.App'));
+const youtube = new Youtube();
+new App({ $app: document.querySelector('.App'), youtube });

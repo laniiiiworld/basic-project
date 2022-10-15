@@ -1,10 +1,10 @@
 import VideoList from './VideoList.js';
-import { getDataAPIs } from '../api.js';
 import { routeChange } from '../router.js';
 import Loading from './Loading.js';
 
 export default class MainPage {
-  constructor({ $target, initialState }) {
+  constructor({ $target, initialState, youtube }) {
+    this.youtube = youtube;
     this.state = initialState;
     this.$mainPage = $target;
     this.$mainPage.className = this.state.className;
@@ -27,7 +27,7 @@ export default class MainPage {
   init = async () => {
     try {
       const channelInfo = [];
-      const videoLists = await this.getVideoListInfo();
+      const videoLists = await this.youtube.videos();
       this.setState({
         ...this.state,
         videoLists: videoLists,
@@ -39,23 +39,6 @@ export default class MainPage {
       this.loading.hide();
     }
   };
-
-  //API에서 추천동영상 정보를 가져오는 함수
-  async getVideoListInfo() {
-    try {
-      const obj = {
-        videoSyndicated: true,
-        part: 'snippet',
-        chart: 'mostPopular',
-        maxResults: 5,
-        regionCode: 'KR',
-      };
-      const videoLists = await getDataAPIs('VIDEO', obj);
-      return videoLists.items;
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   onNextVideoClick = (event) => {
     const $video = event.target.closest('.next');

@@ -1,11 +1,12 @@
 import { init } from '../router.js';
 import Header from './Header.js';
-import MainPage from './MainPage.js';
-import VideoSearchPage from './VideoSearchPage.js';
-import VideoDetailPage from './VideoDetailPage.js';
+import MainPage from './mainPage.js';
+import VideoSearchPage from './videoSearchPage.js';
+import VideoDetailPage from './videoDetailPage.js';
 
 export default class App {
-  constructor($app) {
+  constructor({ $app, youtube }) {
+    this.youtube = youtube;
     this.$header = new Header({ $target: $app, initialState: {} });
     this.$page = document.createElement('main');
     $app.appendChild(this.$page);
@@ -21,12 +22,12 @@ export default class App {
     document.querySelector('.keywordSearchInput').blur();
     this.$page.innerHTML = '';
     if (pathname === '/') {
-      new MainPage({ $target: this.$page, initialState: { className: 'mainPage' } });
+      new MainPage({ $target: this.$page, initialState: { className: 'mainPage' }, youtube: this.youtube });
     } else if (pathname.indexOf('/detail') === 0) {
       const videoId = pathname.split('/')[2];
-      new VideoDetailPage({ $target: this.$page, initialState: { className: 'videoDetailPage' }, videoId });
+      new VideoDetailPage({ $target: this.$page, initialState: { className: 'videoDetailPage' }, videoId, youtube: this.youtube });
     } else if (pathname.indexOf('/search') === 0) {
-      new VideoSearchPage({ $target: this.$page, initialState: { className: 'videoSearchPage' } });
+      new VideoSearchPage({ $target: this.$page, initialState: { className: 'videoSearchPage' }, youtube: this.youtube });
     }
   };
 }
