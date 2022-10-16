@@ -27,11 +27,6 @@
   --medium-space: 0.4em;
   --small-space: 0.2em;
 
-  /* media query */
-  --media-query-large: 992px;
-  --media-query-medium: 768px;
-  --media-query-small: 576px;
-
   /* video Detail */
   --video-detail-left: 1 1 70%;
   --video-detail-right: 1 1 30%;

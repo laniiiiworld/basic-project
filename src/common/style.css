@@ -322,7 +322,7 @@ main.videoDetailPage {
 }
 
 /* +++++++++++++++++ media query +++++++++++++++++ */
-@media only screen and (max-width: var(--media-query-large)) {
+@media only screen and (max-width: 992px) {
   main.videoDetailPage {
     flex-direction: column;
   }
@@ -330,7 +330,7 @@ main.videoDetailPage {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@media only screen and (max-width: var(--media-query-medium)) {
+@media only screen and (max-width: 768px) {
   .videoPlayer {
     position: static;
   }
@@ -338,7 +338,7 @@ main.videoDetailPage {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media only screen and (max-width: var(--media-query-small)) {
+@media only screen and (max-width: 576px) {
   .videoPlayer {
     position: sticky;
   }
