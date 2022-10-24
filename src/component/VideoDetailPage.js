@@ -1,6 +1,6 @@
 import VideoList from './videoList.js';
 import Loading from './loading.js';
-import VideoDetail from './videoDetail.js';
+import VideoDetail from './videoDetail.js';
 
 export default class VideoDetailPage {
   constructor({ $target, initialState, videoId, youtube }) {
