@@ -1,7 +1,7 @@
 import KeywordSearch from './keywordSearch.js';
 import SelectedKeyword from './selectedKeyword.js';
 import { routeChange } from '../router.js';
-import { getSelectedKeywords, setSelectedKeywords, setSelectedKeyword, removeSelectedKeyword } from '../storage.js';
+import { getSelectedKeywords, setSelectedKeywords, setSelectedKeyword, removeSelectedKeyword } from '../service/storage.js';
 
 export default class KeywordSearchArea {
   constructor({ $target }) {
@@ -29,7 +29,7 @@ export default class KeywordSearchArea {
       const deleteIndex = Number(event.target.dataset?.deleteIndex);
       if (selectIndex >= 0) {
         const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
-        const keywordSearchInput = document.querySelector('.keywordSearchInput');
+        const keywordSearchInput = document.querySelector('.keywordSearch .input');
         const index = selectIndex;
         keywordSearchInput.value = selectedKeywords[index];
         setSelectedKeyword('selectedKeywords', keywordSearchInput.value);
@@ -48,7 +48,7 @@ export default class KeywordSearchArea {
         return;
       }
 
-      const keywordSearchInput = document.querySelector('.keywordSearchInput');
+      const keywordSearchInput = document.querySelector('.keywordSearch .input');
       const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
 
       let $nowLi = document.querySelector('.keywordItemSelected');

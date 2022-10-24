@@ -25,7 +25,7 @@ export default class VideoSearchPage {
 
   init = async () => {
     try {
-      const keyword = document.querySelector('.keywordSearchInput').value;
+      const keyword = document.querySelector('.keywordSearch .input').value;
       const channelInfo = [];
       const videoLists = await this.youtube.search(keyword);
       this.setState({
