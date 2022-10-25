@@ -8,41 +8,61 @@ export default class KeywordSearchArea {
     this.state = {
       selectedKeywords: [],
     };
-    this.$element = document.createElement('div');
-    $target.appendChild(this.$element);
-
+    this.$target = $target;
     this.keywordSearch = new KeywordSearch({
-      $target: this.$element,
+      $target,
       initialState: '',
     });
-    this.keywordSearch.setFocusEventListener(this.onSearchInputFocus);
     this.selectedKeyword = new SelectedKeyword({
-      $target: this.$element,
+      $target,
       initialState: {
         items: [],
       },
     });
 
-    //최근검색어 클릭시 이벤트 처리
-    this.$element.addEventListener('click', (event) => {
-      const selectIndex = Number(event.target.dataset?.index);
+    //검색어 입력란 focus -> 최근 검색어 목록 display
+    this.keywordSearch.setFocusEventListener(() => {
+      this.setState({ selectedKeywords: getSelectedKeywords('selectedKeywords', []) });
+    });
+    //검색버튼 click -> 검색
+    this.keywordSearch.setBtnClickEventListener((keyword) => {
+      this.moveVideoSearchPage(keyword);
+    });
+    //검색 영역 밖이 클릭된 경우, 최근 검색어 목록 display none
+    window.addEventListener('click', (event) => {
+      if (event.target.closest('.keywordSearchArea')) return;
+      this.state.selectedKeywords.length && this.setState({ selectedKeywords: [] });
+    });
+
+    //최근검색어 목록에 마우스를 올린 경우
+    this.selectedKeyword.setMouseoverEventListener((event) => {
+      const nextIndex = Number(event.target.closest('li').dataset.index);
+      const $nowLi = document.querySelector('.keywordItemSelected');
+      const $nextLi = document.querySelector(`.selectedKeyword ul li[data-index='${nextIndex}']`);
+      $nowLi && $nowLi.classList.remove('keywordItemSelected');
+      $nextLi && $nextLi.classList.add('keywordItemSelected');
+    });
+
+    //최근검색어 목록 클릭시 이벤트 처리
+    this.selectedKeyword.setClickEventListener((event) => {
+      //삭제
       const deleteIndex = Number(event.target.dataset?.deleteIndex);
-      if (selectIndex >= 0) {
-        const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
-        const keywordSearchInput = document.querySelector('.keywordSearch .input');
-        const index = selectIndex;
-        keywordSearchInput.value = selectedKeywords[index];
-        setSelectedKeyword('selectedKeywords', keywordSearchInput.value);
-        routeChange(`/search`);
-      } else if (deleteIndex >= 0) {
+      if (deleteIndex >= 0) {
         const nextSelectedKeywords = removeSelectedKeyword('selectedKeywords', deleteIndex);
         setSelectedKeywords('selectedKeywords', nextSelectedKeywords);
         this.setState({ selectedKeywords: nextSelectedKeywords });
+        return;
       }
+      //검색
+      const selectIndex = Number(event.target.closest('li').dataset.index);
+      const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
+      const keywordSearchInput = document.querySelector('.keywordSearch .input');
+      keywordSearchInput.value = selectedKeywords[selectIndex];
+      this.moveVideoSearchPage(selectedKeywords[selectIndex]);
     });
 
-    //Enter로 검색, 최근검색어 위아래 키보드로 이동
-    this.$element.addEventListener('keyup', (event) => {
+    //검색 영역(검색어 입력란, 최근 검색어 목록) - 키보드 제어
+    this.$target.addEventListener('keyup', (event) => {
       const navigationKeys = ['Enter', 'ArrowUp', 'ArrowDown'];
       if (!navigationKeys.includes(event.key)) {
         return;
@@ -63,15 +83,14 @@ export default class KeywordSearchArea {
       }
 
       if (event.key === 'Enter') {
-        //Enter로 검색
-        setSelectedKeyword('selectedKeywords', keywordSearchInput.value);
-        routeChange(`/search`);
+        //검색
+        this.moveVideoSearchPage(keywordSearchInput.value);
       } else {
+        //최근검색어 목록 위아래 키보드로 이동
         if (!selectedKeywords.length) {
           return;
         }
 
-        //최근검색어 위아래 키보드로 이동
         if (event.key === 'ArrowUp') {
           nextIndex = selectedIndex === 0 ? lastIndex : selectedIndex - 1;
         } else if (event.key === 'ArrowDown') {
@@ -96,7 +115,10 @@ export default class KeywordSearchArea {
     });
   }
 
-  onSearchInputFocus = () => {
-    this.setState({ selectedKeywords: getSelectedKeywords('selectedKeywords', []) });
+  /** 비디오 검색 결과 페이지로 이동 */
+  moveVideoSearchPage = (keyword) => {
+    if (!keyword) return;
+    setSelectedKeyword('selectedKeywords', keyword);
+    routeChange(`/search`);
   };
 }

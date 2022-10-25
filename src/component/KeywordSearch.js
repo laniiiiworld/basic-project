@@ -12,19 +12,22 @@ export default class KeywordSearch {
 
     const keywordSearchInput = document.querySelector('.keywordSearch .input');
     const keywordSearchBtn = document.querySelector('.keywordSearch .button');
-    //검색어 입력란 focus
+    //검색어 입력란 focus 이벤트
     keywordSearchInput.addEventListener('focus', (event) => {
       this.onFocus && this.onFocus(event);
     });
-    //검색
-    keywordSearchBtn.addEventListener('click', (event) => {
-      setSelectedKeyword('selectedKeywords', keywordSearchInput.value);
-      routeChange(`/search`);
+    //검색 버튼 click 이벤트
+    keywordSearchBtn.addEventListener('click', () => {
+      this.onClick && this.onClick(keywordSearchInput.value);
     });
   }
 
   setFocusEventListener(onFocus) {
     this.onFocus = onFocus;
+  }
+
+  setBtnClickEventListener(onClick) {
+    this.onClick = onClick;
   }
 
   render() {

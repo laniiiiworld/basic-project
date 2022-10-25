@@ -5,20 +5,25 @@ export default class SelectedKeyword {
     this.state = {
       items: initialState.items,
     };
-
     $target.appendChild(this.$element);
     this.render();
 
-    //최근검색어에 마우스를 올린 경우 제어
+    //최근검색어 목록 mouseover 이벤트
     this.$element.addEventListener('mouseover', (event) => {
-      const nextIndex = Number(event.target.dataset?.index);
-      if (nextIndex >= 0) {
-        const $nowLi = document.querySelector('.keywordItemSelected');
-        const $nextLi = document.querySelector(`.selectedKeyword ul li[data-index='${nextIndex}']`);
-        $nowLi && $nowLi.classList.remove('keywordItemSelected');
-        $nextLi && $nextLi.classList.add('keywordItemSelected');
-      }
+      this.onMouseover && this.onMouseover(event);
     });
+    //최근검색어 목록 click 이벤트
+    this.$element.addEventListener('click', (event) => {
+      this.onClick && this.onClick(event);
+    });
+  }
+
+  setMouseoverEventListener(onMouseover) {
+    this.onMouseover = onMouseover;
+  }
+
+  setClickEventListener(onClick) {
+    this.onClick = onClick;
   }
 
   setState = (nextState) => {
