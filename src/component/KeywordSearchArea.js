@@ -33,6 +33,12 @@ export default class KeywordSearchArea {
       if (event.target.closest('.keywordSearchArea')) return;
       this.state.selectedKeywords.length && this.setState({ selectedKeywords: [] });
     });
+    //Esc가 눌린 경우, 최근 검색어 목록 display none
+    window.addEventListener('keyup', (event) => {
+      if (event.key === 'Escape') {
+        this.state.selectedKeywords.length && this.setState({ selectedKeywords: [] });
+      }
+    });
 
     //최근검색어 목록에 마우스를 올린 경우
     this.selectedKeyword.setMouseoverEventListener((event) => {
@@ -45,6 +51,8 @@ export default class KeywordSearchArea {
 
     //최근검색어 목록 클릭시 이벤트 처리
     this.selectedKeyword.setClickEventListener((event) => {
+      event.stopPropagation();
+
       //삭제
       const deleteIndex = Number(event.target.dataset?.deleteIndex);
       if (deleteIndex >= 0) {
@@ -63,45 +71,21 @@ export default class KeywordSearchArea {
 
     //검색 영역(검색어 입력란, 최근 검색어 목록) - 키보드 제어
     this.$target.addEventListener('keyup', (event) => {
+      event.stopPropagation();
+
       const navigationKeys = ['Enter', 'ArrowUp', 'ArrowDown'];
       if (!navigationKeys.includes(event.key)) {
         return;
       }
-
       const keywordSearchInput = document.querySelector('.keywordSearch .input');
-      const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
-
-      let $nowLi = document.querySelector('.keywordItemSelected');
-      const lastIndex = selectedKeywords.length - 1;
-      let selectedIndex;
-      let nextIndex;
-
-      if ($nowLi) {
-        selectedIndex = Number($nowLi.dataset.index);
-      } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-        selectedIndex = event.key === 'ArrowUp' ? lastIndex + 1 : -1;
-      }
 
       if (event.key === 'Enter') {
         //검색
         this.moveVideoSearchPage(keywordSearchInput.value);
       } else {
-        //최근검색어 목록 위아래 키보드로 이동
-        if (!selectedKeywords.length) {
-          return;
-        }
-
-        if (event.key === 'ArrowUp') {
-          nextIndex = selectedIndex === 0 ? lastIndex : selectedIndex - 1;
-        } else if (event.key === 'ArrowDown') {
-          nextIndex = selectedIndex === lastIndex ? 0 : selectedIndex + 1;
-        }
-        keywordSearchInput.value = selectedKeywords[nextIndex];
+        //최근검색어 목록 키보드로 위,아래 이동
+        this.controlUpAndDown(event.key, keywordSearchInput);
       }
-
-      const $nextLi = document.querySelector(`.selectedKeyword ul li[data-index='${nextIndex}']`);
-      $nowLi && $nowLi.classList.remove('keywordItemSelected');
-      $nextLi && $nextLi.classList.add('keywordItemSelected');
     });
   }
 
@@ -120,5 +104,34 @@ export default class KeywordSearchArea {
     if (!keyword) return;
     setSelectedKeyword('selectedKeywords', keyword);
     routeChange(`/search`);
+  };
+
+  /** 최근검색어 목록 키보드로 위,아래 이동 */
+  controlUpAndDown = (key, input) => {
+    const selectedKeywords = getSelectedKeywords('selectedKeywords', []);
+    if (!selectedKeywords.length) return;
+
+    let $nowLi = document.querySelector('.keywordItemSelected');
+    const lastIndex = selectedKeywords.length - 1;
+    let selectedIndex;
+    let nextIndex;
+
+    if ($nowLi) {
+      selectedIndex = Number($nowLi.dataset.index);
+    } else if (key === 'ArrowUp' || key === 'ArrowDown') {
+      selectedIndex = key === 'ArrowUp' ? lastIndex + 1 : -1;
+    }
+
+    if (key === 'ArrowUp') {
+      nextIndex = selectedIndex === 0 ? lastIndex : selectedIndex - 1;
+    } else if (key === 'ArrowDown') {
+      nextIndex = selectedIndex === lastIndex ? 0 : selectedIndex + 1;
+    }
+
+    input.value = selectedKeywords[nextIndex];
+
+    const $nextLi = document.querySelector(`.selectedKeyword ul li[data-index='${nextIndex}']`);
+    $nowLi && $nowLi.classList.remove('keywordItemSelected');
+    $nextLi && $nextLi.classList.add('keywordItemSelected');
   };
 }
