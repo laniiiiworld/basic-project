@@ -1,6 +1,3 @@
-import { routeChange } from '../router.js';
-import { setSelectedKeyword } from '../service/storage.js';
-
 export default class KeywordSearch {
   constructor({ $target, initialState }) {
     this.$element = document.createElement('from');

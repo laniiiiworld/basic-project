@@ -30,7 +30,7 @@ header .logo i {
 header .keywordSearchArea {
   text-align: center;
 }
-header .keywordSearchArea keywordSearch {
+header .keywordSearchArea .keywordSearch {
   display: flex;
   height: calc(var(--XXXLarge-size) * 1.1);
 }
@@ -77,15 +77,16 @@ header .keywordSearchArea .keywordSearch .button:hover {
   display: flex;
   justify-content: space-between;
 }
-.selectedKeyword ul li span {
+.selectedKeyword ul li .keyword {
   padding: var(--medium-space);
 }
-.selectedKeyword ul li a {
+.selectedKeyword ul li .deleteButton {
   font-size: var(--small-size);
   padding: var(--medium-space);
+  color: var(--blue-color);
 }
 
-.selectedKeyword ul li a:hover {
+.selectedKeyword ul li .deleteButton:hover {
   text-decoration: underline;
 }
 

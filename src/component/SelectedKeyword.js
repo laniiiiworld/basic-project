@@ -46,7 +46,7 @@ export default class SelectedKeyword {
     this.$element.style.display = 'block';
     this.$element.innerHTML = `
         <ul>
-        ${items.map((item, index) => `<li data-index="${index}"><span>${item}</span><a href="javascript:void(0);" data-delete-index="${index}">삭제</a></li>`).join('')}
+        ${items.map((item, index) => `<li data-index="${index}"><span class='keyword'>${item}</span><span class='deleteButton' data-delete-index="${index}">삭제</span></li>`).join('')}
         </ul>
       `;
   };
