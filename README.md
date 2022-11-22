@@ -28,7 +28,7 @@
 
 ### 버전 별 GitHub와 Demo
 
-|                                                 JavaScript |                    React(Class Component)                     |              React(Function Component, React Hooks)               |
-| ---------------------------------------------------------: | :-----------------------------------------------------------: | :---------------------------------------------------------------: |
-|             [Demo](https://youtubeclone-lani.netlify.app/) |     [Demo](https://youtubeclone-lani-react.netlify.app/)      |     [Demo](https://youtubeclone-lani-reacthooks.netlify.app/)     |
+|                         JavaScript                         |                    React(Class Component)                     |              React(Function Component, React Hooks)               |
+| :--------------------------------------------------------: | :-----------------------------------------------------------: | :---------------------------------------------------------------: |
+|       [Demo](https://youtubeclone-lani.netlify.app/)       |     [Demo](https://youtubeclone-lani-react.netlify.app/)      |     [Demo](https://youtubeclone-lani-reacthooks.netlify.app/)     |
 | [GitHub](https://github.com/laniiiiworld/youTube-clone-js) | [GitHub](https://github.com/laniiiiworld/youTube-clone-react) | [GitHub](https://github.com/laniiiiworld/youTube-clone-reacthook) |
