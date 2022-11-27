@@ -13,16 +13,13 @@ export default class Channel {
     //채널 정보 세팅 setChannelInfo
     const channelInfo = this.state.channelInfo;
     if (channelInfo.length === 0) return;
+    const formatter = Intl.NumberFormat(navigator.language, {
+      notation: 'compact',
+      compactDisplay: 'short',
+    });
     const subscriberCount = channelInfo.statistics.subscriberCount;
+    this.subscribers.innerHTML = formatter.format(Number(subscriberCount));
     this.user.src = channelInfo.snippet.thumbnails.default.url;
     this.channelName.innerHTML = channelInfo.snippet.title;
-
-    if (subscriberCount.length > 5) {
-      this.subscribers.innerHTML = Math.floor((subscriberCount * 1) / 10000) + '만명';
-    } else if (subscriberCount.length > 4) {
-      this.subscribers.innerHTML = Math.floor((subscriberCount * 1) / 1000) / 10 + '만명';
-    } else {
-      this.subscribers.innerHTML = subscriberCount;
-    }
   }
 }
